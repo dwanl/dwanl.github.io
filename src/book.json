@@ -1,0 +1,62 @@
+{
+    "plugins": [
+        "page-copyright",
+        "page-toc-button",
+        "-tbfed-pagefooter",
+        "expandable-chapters",
+        "github",
+        "-pageview-count",
+        "back-to-top-button",
+        "splitter",
+        "sharing", 
+        "-sharing-plus",
+        "-klipse",
+        "-hide-element",
+        "-insert-logo" 
+    ],
+    "pluginsConfig": {
+        "github": {
+            "url": "https://github.com/xingleizhao"
+        },
+        "page-toc-button": {
+            "maxTocDepth": 1,
+            "minTocSize": 1
+        }
+    },
+    "links" : {
+        
+    },
+    "sharing": {
+        "douban": true,
+        "facebook": true,
+        "google": true,
+        "pocket": true,
+        "qq": true,
+        "qzone": true,
+        "twitter": true,
+        "weibo": true,
+     "all": [
+          "douban", "facebook", "google", "instapaper", "linkedin","twitter", "weibo", 
+          "messenger","qq", "qzone","viber","whatsapp"
+        ]
+   },
+   "hide-element": {
+        "elements": [".gitbook-link"]
+    },
+    "insert-logo": {
+        "url": "images/logo.png",
+        "style": "background: none; max-height: 30px; min-height: 30px"
+    },
+    "page-copyright": {
+        "description": "modified at",
+        "signature": "你的签名",
+        "wisdom": "Designer, Frontend Developer & overall web enthusiast",
+        "format": "YYYY-MM-dd hh:mm:ss",
+        "copyright": "Copyright &#169; 你的名字",
+        "timeColor": "#666",
+        "copyrightColor": "#666",
+        "utcOffset": "8",
+        "style": "normal",
+        "noPowered": false
+    }
+}
