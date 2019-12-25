@@ -94,7 +94,7 @@
 
 
 
-  <meta name="keywords" content="ES6,高阶函数," />
+  <meta name="keywords" content="执行机制," />
 
 
 
@@ -107,16 +107,22 @@
 
 
 
-<meta name="description" content="reduce 方法介绍：reduce() 方法对数组每个元素执行一个 reduce 函数，将其结果汇总为单个返回值。 1const array &#x3D; [1, 2, 3, 4];2const reducer &#x3D; (accumulator, currentValue) &#x3D;&amp;gt; accumulator + currentValue;3&#x2F;&#x2F; 1 + 2 + 3 + 44console.log(array">
-<meta name="keywords" content="ES6,高阶函数">
+<meta name="description" content="事件循环1事件循环是计算机系统的一种运行机制，JavaScript 采用事件循环机制来处理异步任务的执行。  HTML规范 中指出：一个事件循环有一个或者多个任务队列（Task Queue），一个任务队列有一组任务（异步任务）。 任务可以分成两种，一种是同步任务，另一种是异步任务。 1执行栈中的同步任务执行完毕后，才会将事件队列中的异步任务加入到主线程执行。  同步任务形成 执行栈，是指在主线程上">
+<meta name="keywords" content="执行机制">
 <meta property="og:type" content="article">
-<meta property="og:title" content="reduce 函数详解">
-<meta property="og:url" content="http:&#x2F;&#x2F;www.webinfoq.cn&#x2F;2019&#x2F;12&#x2F;09&#x2F;reduce&#x2F;index.html">
+<meta property="og:title" content="Node 与浏览器 EventLoop 的差异">
+<meta property="og:url" content="http:&#x2F;&#x2F;www.webinfoq.cn&#x2F;2019&#x2F;12&#x2F;24&#x2F;%E5%85%B3%E4%BA%8E%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF&#x2F;index.html">
 <meta property="og:site_name" content="塞纳河左岸">
-<meta property="og:description" content="reduce 方法介绍：reduce() 方法对数组每个元素执行一个 reduce 函数，将其结果汇总为单个返回值。 1const array &#x3D; [1, 2, 3, 4];2const reducer &#x3D; (accumulator, currentValue) &#x3D;&amp;gt; accumulator + currentValue;3&#x2F;&#x2F; 1 + 2 + 3 + 44console.log(array">
+<meta property="og:description" content="事件循环1事件循环是计算机系统的一种运行机制，JavaScript 采用事件循环机制来处理异步任务的执行。  HTML规范 中指出：一个事件循环有一个或者多个任务队列（Task Queue），一个任务队列有一组任务（异步任务）。 任务可以分成两种，一种是同步任务，另一种是异步任务。 1执行栈中的同步任务执行完毕后，才会将事件队列中的异步任务加入到主线程执行。  同步任务形成 执行栈，是指在主线程上">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-12-09T04:31:32.156Z">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.loli.net&#x2F;2019&#x2F;09&#x2F;27&#x2F;wNb9KecBHvyGtWL.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.loli.net&#x2F;2019&#x2F;09&#x2F;27&#x2F;jZNezAMIwUkbxWR.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.loli.net&#x2F;2019&#x2F;09&#x2F;27&#x2F;vskWbIJrhP5CKX9.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.loli.net&#x2F;2019&#x2F;09&#x2F;27&#x2F;THPNqOjWvIAXsBG.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.loli.net&#x2F;2019&#x2F;09&#x2F;27&#x2F;7rbNAxsjhLf3uZM.png">
+<meta property="og:updated_time" content="2019-12-25T10:41:57.811Z">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;i.loli.net&#x2F;2019&#x2F;09&#x2F;27&#x2F;wNb9KecBHvyGtWL.png">
 
 
 
@@ -146,13 +152,13 @@
 
 
 
-  <link rel="canonical" href="http://www.webinfoq.cn/2019/12/09/reduce/"/>
+  <link rel="canonical" href="http://www.webinfoq.cn/2019/12/24/关于事件循环/"/>
 
 
 
 
 
-  <title>reduce 函数详解 | 塞纳河左岸</title>
+  <title>Node 与浏览器 EventLoop 的差异 | 塞纳河左岸</title>
   
 
 
@@ -279,7 +285,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.webinfoq.cn/2019/12/09/reduce/">
+    <link itemprop="mainEntityOfPage" href="http://www.webinfoq.cn/2019/12/24/%E5%85%B3%E4%BA%8E%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="破晓 L">
@@ -296,7 +302,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">reduce 函数详解</h1>
+          <h1 class="post-title" itemprop="name headline">Node 与浏览器 EventLoop 的差异</h1>
         
 
         <div class="post-meta">
@@ -308,8 +314,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-12-09T12:26:30+08:00">
-                2019-12-09
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-12-24T14:07:34+08:00">
+                2019-12-24
               </time>
             
 
@@ -368,16 +374,47 @@
       
 
       
-        <h3 id="reduce-方法介绍："><a href="#reduce-方法介绍：" class="headerlink" title="reduce 方法介绍："></a><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce" target="_blank" rel="noopener">reduce 方法介绍：</a></h3><p><code>reduce()</code> 方法对数组每个元素执行一个 <code>reduce</code> 函数，将其结果汇总为单个返回值。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> array = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> reducer = <span class="function">(<span class="params">accumulator, currentValue</span>) =&gt;</span> accumulator + currentValue;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1 + 2 + 3 + 4</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(array.reduce(reducer));  <span class="comment">// 10</span></span></pre></td></tr></table></figure>
+        <h2 id="事件循环"><a href="#事件循环" class="headerlink" title="事件循环"></a><a href="https://jakearchibald.com/2015/tasks-microtasks-queues-and-schedules/#why-this-happens" target="_blank" rel="noopener">事件循环</a></h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">事件循环是计算机系统的一种运行机制，JavaScript 采用事件循环机制来处理异步任务的执行。</span></pre></td></tr></table></figure>
 
-<h3 id="reduce-方法使用场景："><a href="#reduce-方法使用场景：" class="headerlink" title="reduce 方法使用场景："></a>reduce 方法使用场景：</h3><h5 id="1-对数组进行求和"><a href="#1-对数组进行求和" class="headerlink" title="1. 对数组进行求和"></a>1. 对数组进行求和</h5><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">参见上段代码</span></pre></td></tr></table></figure>
-<h5 id="2-将二维数组转换为一维数组"><a href="#2-将二维数组转换为一维数组" class="headerlink" title="2. 将二维数组转换为一维数组"></a>2. 将二维数组转换为一维数组</h5><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> array = [[<span class="number">1</span>, <span class="number">2</span>], [<span class="number">3</span>, <span class="number">4</span>], [<span class="number">5</span>, <span class="number">6</span>]];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> reducer = <span class="function">(<span class="params">acc, cur</span>) =&gt;</span> acc.concat(cur);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> result = array.reduce(reducer, [])   <span class="comment">// 将 [] 作为回到函数第一个参数</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(result); <span class="comment">//[1, 2, 3, 4, 5, 6]</span></span></pre></td></tr></table></figure>
+<p><a href="https://html.spec.whatwg.org/multipage/webappapis.html#event-loop" target="_blank" rel="noopener">HTML规范</a> 中指出：一个事件循环有一个或者多个<strong>任务队列（Task Queue）</strong>，一个任务队列有一组<strong>任务（异步任务）</strong>。</p>
+<p>任务可以分成两种，一种是<strong>同步任务</strong>，另一种是<strong>异步任务</strong>。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">执行栈中的同步任务执行完毕后，才会将事件队列中的异步任务加入到主线程执行。</span></pre></td></tr></table></figure>
 
-<h5 id="3-计算数组每个元素出现的次数"><a href="#3-计算数组每个元素出现的次数" class="headerlink" title="3. 计算数组每个元素出现的次数"></a>3. 计算数组每个元素出现的次数</h5><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> names = [<span class="string">'jser'</span>, <span class="string">'jser'</span>, <span class="string">'javaer'</span>, <span class="string">'javaer'</span>, <span class="string">'phper'</span>, <span class="string">'pythener'</span>]</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> obj = &#123;&#125;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">names.reduce(<span class="function">(<span class="params">acc, cur</span>) =&gt;</span> &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    acc[cur]? acc[cur]++ : acc[cur] = <span class="number">1</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">return</span> acc;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">&#125;, obj)   <span class="comment">// 将 obj 作为回到函数第一个参数 obj</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//解析：</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//第一次遍历：acc = &#123;&#125; cur = "jser"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//第二次遍历：acc = &#123;jser: 1&#125; cur = "jser"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//第三次遍历：acc = &#123;jser: 2&#125; cur = "javaer"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//第四次遍历：acc = &#123;jser: 2, javaer: 1&#125; cur = "javaer"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//第五次遍历：acc = &#123;jser: 2, javaer: 2&#125; cur = "phper"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//第六次遍历：acc = &#123;jser: 2, javaer: 2, phper: 1&#125; cur = "pythener"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//第七次退出：acc = &#123;jser: 2, javaer: 2, phper: 1, pythen: 1&#125;  </span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(obj) <span class="comment">// &#123;jser: 2, javaer: 2, phper: 1, pythen: 1&#125;</span></span></pre></td></tr></table></figure>
+<p><strong>同步任务</strong>形成 <code>执行栈</code>，是指在主线程上排队执行的任务。</p>
+<p><strong>异步任务</strong>不进入主线程排队，而是进入 <code>Task Queue</code> 排队的任务，只有 <code>Task Queue</code> 通知主线程，某个异步任务可以执行了，该任务才会进入主线程执行。</p>
+<p><strong>异步任务</strong>分为：<strong>宏任务（macrotask）</strong>和<strong>微任务（microtask）</strong>。</p>
+<ul>
+<li><p><strong>宏任务（macrotask）：</strong><br>  包含执行整体的 JavaScript 代码、事件回调、XHR 回调、定时器（setTimeout/setInterval/setImmediate）、IO操作以及UI渲染。</p>
+</li>
+<li><p><strong>微任务（microtask）：</strong><br>  更新应用程序状态的任务，包括 <code>promise</code> 回调、<code>MutationObserver</code>、<code>process.nextTick</code> 以及 <code>Object.observe</code>。</p>
+</li>
+</ul>
+<img alt="event-loop" src="https://i.loli.net/2019/09/27/wNb9KecBHvyGtWL.png" width="80%">
 
-<h3 id="filter-方法介绍："><a href="#filter-方法介绍：" class="headerlink" title="filter 方法介绍："></a><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/filter" target="_blank" rel="noopener">filter 方法介绍：</a></h3><p><code>filter()</code> 方法创建一个新数组，其成员是通过提供函数测试的所有元素。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> words = [<span class="string">'spray'</span>, <span class="string">'limit'</span>, <span class="string">'elite'</span>, <span class="string">'exuberant'</span>, <span class="string">'destruction'</span>, <span class="string">'present'</span>];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> result = words.filter(<span class="function"><span class="params">word</span> =&gt;</span> word.length &gt; <span class="number">6</span>);  <span class="comment">// 元素的长度大于6的通过测试</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(result); [<span class="string">"exuberant"</span>, <span class="string">"destruction"</span>, <span class="string">"present"</span>]</span></pre></td></tr></table></figure>
+<h2 id="Node-js-中的事件循环"><a href="#Node-js-中的事件循环" class="headerlink" title="Node.js 中的事件循环"></a>Node.js 中的事件循环</h2><p>当 <code>node.js</code> 运行时，会初始化一个 <code>EventLoop</code>，处理那些通过<strong>异步api调用</strong>、<strong>定时器</strong>或者调用 <code>process.nextTick()</code> 提供的 <code>script</code>或者输入到 <code>REPL</code> 中的 <code>script</code>。</p>
+<p>下图展示了事件循环的操作顺序以及概要。</p>
+<img alt="node事件循环" src="https://i.loli.net/2019/09/27/jZNezAMIwUkbxWR.png" width="90%">
+
+<h2 id="浏览器中的事件循环"><a href="#浏览器中的事件循环" class="headerlink" title="浏览器中的事件循环"></a>浏览器中的事件循环</h2><blockquote>
+<p>一个宏任务可能包含多个微任务。</p>
+</blockquote>
+<ul>
+<li><p>执行一个<strong>宏任务（macrotask）</strong>。</p>
+</li>
+<li><p>执行过程中如果遇到<strong>微任务（microtask）</strong>，就将它添加到微任务的任务队列中。</p>
+</li>
+<li><p><strong>宏任务（macrotask）</strong>执行完毕后，立即执行当前<strong>微任务（microtask）</strong>队列中的所有微任务（先进先出）。</p>
+</li>
+<li><p>重复上述三个步骤，当所有任务执行完毕，开始检查渲染，然后 <code>GUI</code> 线程接管渲染。</p>
+</li>
+</ul>
+<img alt="浏览器事件循环" src="https://i.loli.net/2019/09/27/vskWbIJrhP5CKX9.png" width="50%">
+
+<h2 id="差异"><a href="#差异" class="headerlink" title="差异"></a>差异</h2><p><strong>Node.js 中</strong>，微任务 <code>microtask</code> 会在事件循环的各个阶段之间执行，也就是一个阶段执行完毕，就会去执行 <code>microtask</code> 队列的任务。</p>
+<img alt="node事件循环" src="https://i.loli.net/2019/09/27/THPNqOjWvIAXsBG.png" width="70%">
+
+<p><strong>浏览器环境下</strong>，微任务 <code>microtask</code> 队列是在每个宏任务 <code>macrotask</code> 执行完之后执行。</p>
+<img alt="浏览器事件循环" src="https://i.loli.net/2019/09/27/7rbNAxsjhLf3uZM.png" width="70%">
       
     </div>
     
@@ -418,9 +455,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/ES6/" rel="tag"># ES6</a>
-          
-            <a href="/tags/%E9%AB%98%E9%98%B6%E5%87%BD%E6%95%B0/" rel="tag"># 高阶函数</a>
+            <a href="/tags/%E6%89%A7%E8%A1%8C%E6%9C%BA%E5%88%B6/" rel="tag"># 执行机制</a>
           
         </div>
       
@@ -433,8 +468,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/07/14/%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93/" rel="next" title="总结一些知识点">
-                <i class="fa fa-chevron-left"></i> 总结一些知识点
+              <a href="/2019/12/23/%E5%B7%A5%E5%85%B7%E5%87%BD%E6%95%B0/" rel="next" title="一些工具函数集合">
+                <i class="fa fa-chevron-left"></i> 一些工具函数集合
               </a>
             
           </div>
@@ -443,8 +478,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/12/23/%E5%B7%A5%E5%85%B7%E5%87%BD%E6%95%B0/" rel="prev" title="一些工具函数集合">
-                一些工具函数集合 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/12/24/%E5%BC%82%E6%AD%A5%E5%87%BD%E6%95%B0/" rel="prev" title="async await 代码风格指南">
+                async await 代码风格指南 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -604,7 +639,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#reduce-方法介绍："><span class="nav-number">1.</span> <span class="nav-text">reduce 方法介绍：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#reduce-方法使用场景："><span class="nav-number">2.</span> <span class="nav-text">reduce 方法使用场景：</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-对数组进行求和"><span class="nav-number">2.0.1.</span> <span class="nav-text">1. 对数组进行求和</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-将二维数组转换为一维数组"><span class="nav-number">2.0.2.</span> <span class="nav-text">2. 将二维数组转换为一维数组</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-计算数组每个元素出现的次数"><span class="nav-number">2.0.3.</span> <span class="nav-text">3. 计算数组每个元素出现的次数</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#filter-方法介绍："><span class="nav-number">3.</span> <span class="nav-text">filter 方法介绍：</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#事件循环"><span class="nav-number">1.</span> <span class="nav-text">事件循环</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Node-js-中的事件循环"><span class="nav-number">2.</span> <span class="nav-text">Node.js 中的事件循环</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#浏览器中的事件循环"><span class="nav-number">3.</span> <span class="nav-text">浏览器中的事件循环</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#差异"><span class="nav-number">4.</span> <span class="nav-text">差异</span></a></li></ol></div>
             
 
           </div>
