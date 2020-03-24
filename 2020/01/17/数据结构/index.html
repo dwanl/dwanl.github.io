@@ -1,0 +1,1076 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="数据结构," />
+
+
+
+
+
+  <link rel="alternate" href="http://your-feed-url" title="塞纳河左岸" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="数据结构的概念数据结构，直白的理解，就是研究数据的存储方式。 数据结构是一门学科，它教会我们「如何存储具有复杂关系的数据更有助于后期对数据的再利用」。 存储结构数据结构大致包含以下几种存储结构：  线性表 顺序表 链表 栈和队列   树结构 普通树 二叉树 线索二叉树等   图存储结构  下面对各种数据结构做详细讲解。 线性表将具有 「一对一」 关系的数据 「线性」 地存储到物理空间中，这种存储结">
+<meta name="keywords" content="数据结构">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据结构基础详解">
+<meta property="og:url" content="http:&#x2F;&#x2F;www.webinfoq.cn&#x2F;2020&#x2F;01&#x2F;17&#x2F;%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84&#x2F;index.html">
+<meta property="og:site_name" content="塞纳河左岸">
+<meta property="og:description" content="数据结构的概念数据结构，直白的理解，就是研究数据的存储方式。 数据结构是一门学科，它教会我们「如何存储具有复杂关系的数据更有助于后期对数据的再利用」。 存储结构数据结构大致包含以下几种存储结构：  线性表 顺序表 链表 栈和队列   树结构 普通树 二叉树 线索二叉树等   图存储结构  下面对各种数据结构做详细讲解。 线性表将具有 「一对一」 关系的数据 「线性」 地存储到物理空间中，这种存储结">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https:&#x2F;&#x2F;imgkr.cn-bj.ufileos.com&#x2F;9c3331f2-9fa4-4adf-96f5-89640c9cfe36.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;imgkr.cn-bj.ufileos.com&#x2F;05d95373-e48a-4ddd-bda7-49e260e8611a.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;imgkr.cn-bj.ufileos.com&#x2F;b0c3fec4-6b1e-4b60-b046-aa5efff54d2e.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;imgkr.cn-bj.ufileos.com&#x2F;d0914212-accb-4b43-b758-7b469b7744c9.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;imgkr.cn-bj.ufileos.com&#x2F;88270fca-ab3a-487d-bbde-cd9406b3239f.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;imgkr.cn-bj.ufileos.com&#x2F;4cfde3f5-8c58-4e8f-b486-071eb146fed2.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;imgkr.cn-bj.ufileos.com&#x2F;597147e1-5496-42ca-bd19-bc5fc33fc5e0.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;c.biancheng.net&#x2F;uploads&#x2F;allimg&#x2F;190426&#x2F;1G204H44-0.gif">
+<meta property="og:image" content="http:&#x2F;&#x2F;c.biancheng.net&#x2F;uploads&#x2F;allimg&#x2F;190426&#x2F;1G4211O6-0.gif">
+<meta property="og:image" content="https:&#x2F;&#x2F;imgkr.cn-bj.ufileos.com&#x2F;354f372a-05a7-4687-b551-b91a85dc6181.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;c.biancheng.net&#x2F;uploads&#x2F;allimg&#x2F;190426&#x2F;1G4212457-2.gif">
+<meta property="og:image" content="http:&#x2F;&#x2F;c.biancheng.net&#x2F;uploads&#x2F;allimg&#x2F;190426&#x2F;1G4213X2-3.gif">
+<meta property="og:image" content="http:&#x2F;&#x2F;c.biancheng.net&#x2F;uploads&#x2F;allimg&#x2F;190426&#x2F;1G4211A5-4.gif">
+<meta property="og:image" content="http:&#x2F;&#x2F;c.biancheng.net&#x2F;uploads&#x2F;allimg&#x2F;190426&#x2F;1G513E01-0.gif">
+<meta property="og:image" content="http:&#x2F;&#x2F;c.biancheng.net&#x2F;uploads&#x2F;allimg&#x2F;190426&#x2F;1G5134J2-1.gif">
+<meta property="og:image" content="https:&#x2F;&#x2F;imgkr.cn-bj.ufileos.com&#x2F;71d4e843-0bcf-4466-9c37-9caea2daa5f7.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;imgkr.cn-bj.ufileos.com&#x2F;a95fd07c-fc8d-436d-aa88-515ab936fcce.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;imgkr.cn-bj.ufileos.com&#x2F;9ad11f9a-71cc-4558-a926-51daf8e88f1c.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;imgkr.cn-bj.ufileos.com&#x2F;7a5f9d16-288a-4988-abe7-b111754762bd.png">
+<meta property="og:updated_time" content="2020-01-20T07:27:04.508Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;imgkr.cn-bj.ufileos.com&#x2F;9c3331f2-9fa4-4adf-96f5-89640c9cfe36.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":10,"b2t":true,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.webinfoq.cn/2020/01/17/数据结构/"/>
+
+
+
+
+
+  <title>数据结构基础详解 | 塞纳河左岸</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">塞纳河左岸</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Rive gauche</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-university"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.webinfoq.cn/2020/01/17/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="破晓 L">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="塞纳河左岸">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">数据结构基础详解</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-01-17T13:45:20+08:00">
+                2020-01-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/" itemprop="url" rel="index">
+                    <span itemprop="name">计算机基础</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="数据结构的概念"><a href="#数据结构的概念" class="headerlink" title="数据结构的概念"></a>数据结构的概念</h1><p>数据结构，直白的理解，就是研究数据的存储方式。</p>
+<p>数据结构是一门学科，它教会我们「如何存储具有复杂关系的数据更有助于后期对数据的再利用」。</p>
+<h1 id="存储结构"><a href="#存储结构" class="headerlink" title="存储结构"></a>存储结构</h1><p><strong>数据结构大致包含以下几种存储结构：</strong></p>
+<ol>
+<li>线性表<ul>
+<li>顺序表</li>
+<li>链表</li>
+<li>栈和队列</li>
+</ul>
+</li>
+<li>树结构<ul>
+<li>普通树</li>
+<li>二叉树</li>
+<li>线索二叉树等</li>
+</ul>
+</li>
+<li>图存储结构</li>
+</ol>
+<p>下面对各种数据结构做详细讲解。</p>
+<h1 id="线性表"><a href="#线性表" class="headerlink" title="线性表"></a>线性表</h1><p>将具有 <strong>「一对一」</strong> 关系的数据 <strong>「线性」</strong> 地存储到物理空间中，这种存储结构就称为线性存储结构（简称线性表）。</p>
+<blockquote>
+<p>使用线性表存储数据的方式可以这样理解，即「把所有数据用一根线儿串起来，再存储到物理空间中」。</p>
+</blockquote>
+<p><img src="https://imgkr.cn-bj.ufileos.com/9c3331f2-9fa4-4adf-96f5-89640c9cfe36.png" alt="线性表"></p>
+<blockquote>
+<p>使用线性表存储的数据，要求数据类型必须一致。</p>
+</blockquote>
+<p>线性表并不是一种具体的存储结构，它包含<strong>顺序存储结构</strong>和<strong>链式存储结构</strong>，是顺序表和链表的统称。</p>
+<p>上图中我们可以看出，线性表存储数据可细分为以下 <code>2</code> 种：<br>如图 <code>3a)</code> 所示，将数据依次存储在连续的整块物理空间中，这种存储结构称为顺序存储结构（简称<strong>顺序表</strong>）；<br>如图 <code>3b)</code> 所示，数据分散的存储在物理空间中，通过一根线保存着它们之间的逻辑关系，这种存储结构称为链式存储结构（简称<strong>链表</strong>）；</p>
+<h2 id="前驱和后继"><a href="#前驱和后继" class="headerlink" title="前驱和后继"></a>前驱和后继</h2><p>数据结构中，一组数据中的每个个体被称为数据元素，简称<strong>元素</strong>。</p>
+<p>另外，对于具有 <strong>「一对一」</strong> 逻辑关系的数据，我们一直在用「某一元素的左侧（前边）或右侧（后边）」这样不专业的词，其实线性表中有更准确的术语：</p>
+<ul>
+<li>某一元素的左侧相邻元素称为 <strong>直接前驱</strong>，位于此元素左侧的所有元素都统称为 <strong>前驱元素</strong>；</li>
+<li>某一元素的右侧相邻元素称为 <strong>直接后继</strong>，位于此元素右侧的所有元素都统称为 <strong>后继元素</strong>；</li>
+</ul>
+<p>如下图，元素 <code>3</code> 它的直接前驱是 <code>2</code> ，此元素的前驱元素有 <code>2</code> 个，分别是 <code>1</code> 和 <code>2</code>；同理，此元素的直接后继是 <code>4</code> ，后继元素也有 <code>2</code> 个，分别是 <code>4</code> 和 <code>5</code>。</p>
+<p><img src="https://imgkr.cn-bj.ufileos.com/05d95373-e48a-4ddd-bda7-49e260e8611a.png" alt="前驱和后继"></p>
+<h2 id="顺序表"><a href="#顺序表" class="headerlink" title="顺序表"></a>顺序表</h2><p>顺序表，全名顺序存储结构，是线性表的一种。</p>
+<blockquote>
+<p>顺序表存储数据时，会提前申请一整块足够大小的物理空间，然后将数据依次存储起来，存储时做到数据元素之间不留一丝缝隙。</p>
+</blockquote>
+<p>顺序表，简单的理解就是常用的数组，例如使用顺序表存储 <code>[1, 3, 5, 7, 9]</code>，如图：</p>
+<p><img src="https://imgkr.cn-bj.ufileos.com/b0c3fec4-6b1e-4b60-b046-aa5efff54d2e.png" alt="顺序表"></p>
+<blockquote>
+<p>由于顺序表结构的底层实现借助的就是数组，因此对于初学者来说，可以把顺序表完全等价为数组，但实则不是这样。数据结构是研究数据存储方式的一门学科，它囊括的都是各种存储结构，而数组只是各种编程语言中的基本数据类型，并不属于数据结构的范畴。</p>
+</blockquote>
+<h3 id="顺序表的初始化"><a href="#顺序表的初始化" class="headerlink" title="顺序表的初始化"></a>顺序表的初始化</h3><p>使用顺序表存储数据之前，除了要申请足够大小的物理空间之外，为了方便后期使用表中的数据，顺序表还需要实时记录以下 <code>2</code> 项数据：</p>
+<ul>
+<li>顺序表申请的存储容量；</li>
+<li>顺序表的长度，也就是表中存储数据元素的个数；</li>
+</ul>
+<p>由于顺序表可以简单的理解为数组，所以在这里就定义一个数组，将数组当作一个顺序表来处理。</p>
+<blockquote>
+<p>和大多数其他语言不同, JS 数组的 length 是没有上界的. 如果你用大于或等于当前 length 的数字作为下标来存储一个元素, 那么 length 值会被增大以容纳新元素, 不会发生数组越界错误，所以存储容量也是动态变化的。</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 定义一个顺序表</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">List</span>(<span class="params">list</span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">this</span>.data = list || [];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">this</span>.getLength = getLength;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">this</span>.clear = clear; <span class="comment">// 清空顺序表</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">this</span>.insertEl = insertEl; <span class="comment">// 插入元素</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">this</span>.removeEl = removeEl; <span class="comment">// 删除元素</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">this</span>.changeEl = changeEl; <span class="comment">// 更改元素</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">this</span>.findEl = findEl;     <span class="comment">// 查找元素</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<h3 id="顺序表插入元素"><a href="#顺序表插入元素" class="headerlink" title="顺序表插入元素"></a>顺序表插入元素</h3><p>向已有顺序表中插入数据元素，根据插入位置的不同，可分为以下 <code>3</code> 种情况：</p>
+<ul>
+<li>插入到顺序表的表头；</li>
+<li>在表的中间位置插入元素；</li>
+<li>尾随顺序表中已有元素，作为顺序表中的最后一个元素；</li>
+</ul>
+<p>虽然数据元素插入顺序表中的位置有所不同，但是都使用的是同一种方式去解决，即：通过遍历，找到数据元素要插入的位置，然后做如下两步工作：</p>
+<ul>
+<li>将要插入位置元素以及后续的元素整体向后移动一个位置；</li>
+<li>将元素放到腾出来的位置上；</li>
+</ul>
+<p>例如，在 <code>[1, 2, 3, 4, 5]</code> 的第 3 个位置上插入元素 <code>6</code>，实现过程如下：</p>
+<ul>
+<li><p>遍历至顺序表存储第 <code>3</code> 个数据元素的位置。</p>
+<p><img src="https://imgkr.cn-bj.ufileos.com/d0914212-accb-4b43-b758-7b469b7744c9.png" alt="找到目标元素位置"></p>
+</li>
+<li><p>将元素 <code>3</code> 以及后续元素 <code>4</code> 和 <code>5</code> 整体向后移动一个位置。</p>
+<p><img src="https://imgkr.cn-bj.ufileos.com/88270fca-ab3a-487d-bbde-cd9406b3239f.png" alt="将插入位置腾出"></p>
+</li>
+<li><p>将新元素 <code>6</code> 放入腾出的位置。</p>
+<p><img src="https://imgkr.cn-bj.ufileos.com/4cfde3f5-8c58-4e8f-b486-071eb146fed2.png" alt="插入目标元素"></p>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getLength</span>(<span class="params"></span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">return</span> <span class="keyword">this</span>.data.length;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="comment"> * @param &#123;any&#125; el 要插入的元素</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"><span class="comment"> * @param &#123;Number&#125; index 元素下标</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"><span class="comment"> */</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">insertEl</span>(<span class="params">el, index</span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">if</span> (index &gt; <span class="keyword">this</span>.getLength() || index &lt; <span class="number">0</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">      <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'插入位置有错'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">  &#125; <span class="keyword">else</span> &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">// 插入操作，需要将从插入位置开始的后续元素，逐个后移</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> len = <span class="keyword">this</span>.getLength(); len &gt;= index; len--) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">this</span>.data[len] = <span class="keyword">this</span>.data[len - <span class="number">1</span>];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">// 后移完成后，直接将所需插入元素，添加到顺序表的相应位置</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">this</span>.data[index] = el;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.data;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">  &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<blockquote>
+<p>为数组添加元素，可以通过 <code>push()</code>、<code>unshift()</code>、<code>splice(index, 0, element)</code> 方法实现。</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 向数组头部添加元素：</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">arr.unshift();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 向数组末尾添加元素：</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">arr.push();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 向数组下标 index 处插入元素：</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">arr.splice(index, <span class="number">0</span>, el)</span></pre></td></tr></table></figure>
+
+<h3 id="顺序表删除元素"><a href="#顺序表删除元素" class="headerlink" title="顺序表删除元素"></a>顺序表删除元素</h3><p>从顺序表中删除指定元素，只需找到目标元素，并将其后续所有元素整体前移 <code>1</code> 个位置即可。</p>
+<blockquote>
+<p>后续元素整体前移一个位置，会直接将目标元素删除，可间接实现删除元素的目的。</p>
+</blockquote>
+<p>例如，从 <code>[1, 2, 3, 4, 5]</code> 中删除元素 <code>3</code> 的过程，如下图所示：</p>
+<p><img src="https://imgkr.cn-bj.ufileos.com/597147e1-5496-42ca-bd19-bc5fc33fc5e0.png" alt="顺序表删除元素"></p>
+<p><strong>js 代码实现：</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="comment"> * @param &#123;Number&#125; index 被删除元素的下标</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="comment"> */</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">removeEl</span>(<span class="params">index</span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">if</span> (index &gt; <span class="keyword">this</span>.getLength() || index &lt; <span class="number">0</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">      <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'删除位置有误'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">  &#125; <span class="keyword">else</span> &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">// 删除操作</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = index; i &lt; <span class="keyword">this</span>.getLength() - <span class="number">1</span>; i++) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">       <span class="keyword">this</span>.data[i] = <span class="keyword">this</span>.data[i + <span class="number">1</span>];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">this</span>.data.length--;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.data;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">  &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<blockquote>
+<p>删除数组的元素，可以通过 <code>pop()</code>、<code>shift()</code>、<code>splice(index, 1)</code> 方法实现。</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 从数组头部删除元素：</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">arr.shift();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 从数组末尾删除元素：</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">arr.pop();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 从数组下标 index 处删除一个元素：</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">arr.splice(index, <span class="number">1</span>);</span></pre></td></tr></table></figure>
+
+<h3 id="顺序表查找元素"><a href="#顺序表查找元素" class="headerlink" title="顺序表查找元素"></a>顺序表查找元素</h3><p>顺序表中查找目标元素，可以使用多种查找算法实现，比如说二分查找算法、插值查找算法等。</p>
+<p>这里，我们选择顺序查找算法，具体实现代码为：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="comment"> * @param &#123;any&#125; el 需要查找的元素</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="comment"> */</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">findEl</span>(<span class="params">el</span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="keyword">this</span>.getLength(); i++) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">if</span> (<span class="keyword">this</span>.data[i] == el) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> i; <span class="comment">// 第一次匹配到的元素的下标</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">  &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">return</span> <span class="number">-1</span>; <span class="comment">//如果查找失败，返回 -1</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<blockquote>
+<p>查找数组元素的下标，可以使用 <code>indexOf()</code>、<code>lastIndexOf()</code> 方法实现。</p>
+</blockquote>
+<h3 id="顺序表更改元素"><a href="#顺序表更改元素" class="headerlink" title="顺序表更改元素"></a>顺序表更改元素</h3><p>顺序表更改元素的实现过程是：</p>
+<ul>
+<li>找到目标元素；</li>
+<li>直接修改该元素的值；</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="comment"> * @param &#123;any&#125; el 需要更改的元素</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="comment"> * @param &#123;any&#125; newEl 为新的数据元素</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="comment"> */</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">changeEl</span>(<span class="params"> el, newEl</span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">const</span> index = <span class="keyword">this</span>.findEl(el);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">this</span>.data[index] = newEl;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">return</span> <span class="keyword">this</span>.data;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<p>以上是顺序表使用过程中最常用的基本操作，这里给出完整的实现代码：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">List</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">constructor</span>(list) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">this</span>.data = list || [];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">  clear() &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">delete</span> <span class="keyword">this</span>.data;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">this</span>.data = [];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.data;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">  &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">  getLength() &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.data.length;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">  &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">  insertEl(index, el) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">if</span> (index &gt; <span class="keyword">this</span>.getLength() || index &lt; <span class="number">0</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'插入位置有错'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">    &#125; <span class="keyword">else</span> &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">      <span class="comment">// 插入操作，需要将从插入位置开始的后续元素，逐个后移</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">      <span class="keyword">for</span> (<span class="keyword">var</span> len = <span class="keyword">this</span>.getLength(); len &gt;= index; len--) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">          <span class="keyword">this</span>.data[len] = <span class="keyword">this</span>.data[len - <span class="number">1</span>];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">      &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">      <span class="comment">// 后移完成后，直接将所需插入元素，添加到顺序表的相应位置</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line">      <span class="keyword">this</span>.data[index] = el;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line">      <span class="keyword">return</span> <span class="keyword">this</span>.data;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">28</span></pre></td><td class="code"><pre><span class="line">  &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">29</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">30</span></pre></td><td class="code"><pre><span class="line">  <span class="comment">// 通过下标删除元素</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">31</span></pre></td><td class="code"><pre><span class="line">  removeEl(index) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">32</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">if</span> (index &gt; <span class="keyword">this</span>.getLength() || index &lt; <span class="number">0</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">33</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'删除位置有误'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">34</span></pre></td><td class="code"><pre><span class="line">    &#125; <span class="keyword">else</span> &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">35</span></pre></td><td class="code"><pre><span class="line">      <span class="comment">// 删除操作</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">36</span></pre></td><td class="code"><pre><span class="line">      <span class="keyword">for</span> (<span class="keyword">var</span> i = index; i &lt; <span class="keyword">this</span>.getLength() - <span class="number">1</span>; i++) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">37</span></pre></td><td class="code"><pre><span class="line">         <span class="keyword">this</span>.data[i] = <span class="keyword">this</span>.data[i + <span class="number">1</span>];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">38</span></pre></td><td class="code"><pre><span class="line">      &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">39</span></pre></td><td class="code"><pre><span class="line">      <span class="keyword">this</span>.data.length--;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">40</span></pre></td><td class="code"><pre><span class="line">      <span class="keyword">return</span> <span class="keyword">this</span>.data;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">41</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">42</span></pre></td><td class="code"><pre><span class="line">  &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">43</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">44</span></pre></td><td class="code"><pre><span class="line">  changeEl(el, newEl) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">45</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">const</span> index = <span class="keyword">this</span>.findEl(el);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">46</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">this</span>.data[index] = newEl;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">47</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.data;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">48</span></pre></td><td class="code"><pre><span class="line">  &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">49</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">50</span></pre></td><td class="code"><pre><span class="line">  findEl(el) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">51</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="keyword">this</span>.getLength(); i++) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">52</span></pre></td><td class="code"><pre><span class="line">      <span class="keyword">if</span> (<span class="keyword">this</span>.data[i] == el) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">53</span></pre></td><td class="code"><pre><span class="line">          <span class="keyword">return</span> i; <span class="comment">// 第一次匹配到的元素的下标</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">54</span></pre></td><td class="code"><pre><span class="line">      &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">55</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">56</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">return</span> <span class="number">-1</span>; <span class="comment">//如果查找失败，返回 -1</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">57</span></pre></td><td class="code"><pre><span class="line">  &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">58</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">59</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">60</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> list = <span class="keyword">new</span> List([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>])</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">61</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">62</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="string">'初始化顺序表：'</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">63</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(list.data.join(<span class="string">','</span>));</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">64</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">65</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="string">'删除下标为 0 的元素：'</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">66</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(list.removeEl(<span class="number">0</span>).join(<span class="string">','</span>));</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">67</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">68</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="string">'在下标为 3 的位置插入元素 6：'</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">69</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(list.insertEl(<span class="number">3</span>, <span class="number">6</span>).join(<span class="string">','</span>));</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">70</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">71</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="string">'查找元素 3 的下标：'</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">72</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(list.findEl(<span class="number">3</span>));</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">73</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">74</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="string">'将元素 3 改为 6：'</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">75</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(list.changeEl(<span class="number">3</span>, <span class="number">6</span>).join(<span class="string">','</span>))</span></pre></td></tr></table></figure>
+
+<p>程序运行结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">初始化顺序表：</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">1,2,3,4,5</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">删除下标为 0 的元素：</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">2,3,4,5</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">在下标为 3 的位置插入元素 6：</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">2,3,4,6,5</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">查找元素 3 的下标：</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">1</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">将元素 3 改为 6：</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">2,6,4,6,5</span></pre></td></tr></table></figure>
+<h3 id="顺序表（数组）的缺点"><a href="#顺序表（数组）的缺点" class="headerlink" title="顺序表（数组）的缺点"></a>顺序表（数组）的缺点</h3><blockquote>
+<p>数组不总是组织数据的最佳数据结构，原因如下。在很多编程语言中，数组的长度是固定的，所以当数组已被数据填满时，再要加入新的元素就会非常困难。在数组中，添加和删除元素也很麻烦，因为需要将数组中的其他元素向前或向后平移，以反映数组刚刚进行了添加或删除操作。</p>
+</blockquote>
+<p>然而，<code>JavaScript</code> 的数组并不存在上述问题，因为使用 <code>split()</code> 方法不需要再访问数组中的其他元素了。</p>
+<p><strong><code>JavaScript</code> 中数组的主要问题是，它们被实现成了对象，与其他语言(比如 C++ 和 Java) 的数组相比，效率很低(请参考 Crockford 那本书的第 6 章)。</strong></p>
+<p>如果你发现数组在实际使用时很慢，就可以考虑使用<code>链表</code>来替代它。除了对数据的随机访问，<code>链表</code>几乎可以用在任何可以使用一维数组的情况中。如果需要随机访问，数组仍然是更好的选择。</p>
+<h2 id="链表"><a href="#链表" class="headerlink" title="链表"></a>链表</h2><p>链表，别名<code>链式存储结构</code>或<code>单链表</code>，用于存储逻辑关系为 「一对一」 的数据。</p>
+<p>我们知道，使用顺序表（底层实现靠数组）时，<strong>需要提前申请一定大小的存储空间，这块存储空间的物理地址是连续的</strong>，如下图所示。</p>
+<p><img src="http://c.biancheng.net/uploads/allimg/190426/1G204H44-0.gif" alt="顺序表"></p>
+<p>链表则完全不同，使用链表存储数据时，<strong>是随用随申请，因此数据的存储位置是相互分离的，换句话说，数据的存储位置是随机的。</strong></p>
+<p><img src="http://c.biancheng.net/uploads/allimg/190426/1G4211O6-0.gif" alt="单链表"></p>
+<p>我们看到，上图根本无法体现出各数据之间的逻辑关系。对此，链表的解决方案是，每个数据元素在存储时都配备一个指针，用于指向自己的直接后继元素，如下图所示。</p>
+<p><img src="https://imgkr.cn-bj.ufileos.com/354f372a-05a7-4687-b551-b91a85dc6181.png" alt="链表"></p>
+<blockquote>
+<p>数据元素随机存储，并通过指针表示数据之间逻辑关系的存储结构就是链式存储结构。</p>
+</blockquote>
+<h3 id="链表的节点"><a href="#链表的节点" class="headerlink" title="链表的节点"></a>链表的节点</h3><p>链表中每个数据的存储都由以下两部分组成：</p>
+<ul>
+<li>数据元素本身，其所在的区域称为<strong>数据域</strong>；</li>
+<li>指向直接后继元素的指针，所在的区域称为<strong>指针域</strong>；</li>
+</ul>
+<p>链表中存储各数据元素的结构如下图所示：</p>
+<p><img src="http://c.biancheng.net/uploads/allimg/190426/1G4212457-2.gif" alt="链表"></p>
+<p>上图所示的结构在链表中称为<strong>节点</strong>。也就是说，<code>链表实际存储的是一个一个的节点，真正的数据元素包含在这些节点中</code>：</p>
+<p><img src="http://c.biancheng.net/uploads/allimg/190426/1G4213X2-3.gif" alt="节点"></p>
+<h4 id="头节点、头指针和首元节点"><a href="#头节点、头指针和首元节点" class="headerlink" title="头节点、头指针和首元节点"></a>头节点、头指针和首元节点</h4><p><strong>其实，一个完整的链表需要由以下几部分构成：</strong></p>
+<ol>
+<li><p><code>头指针</code>：一个普通的指针，它的特点是永远指向链表第一个节点的位置。很明显，头指针用于指明链表的位置，便于后期找到链表并使用表中的数据；</p>
+</li>
+<li><p><code>节点</code>：链表中的节点又细分为<code>头节点</code>、<code>首元节点</code>和<code>其他节点</code>：</p>
+<ul>
+<li><p><code>头节点</code>：其实就是一个不存任何数据的空节点，通常作为链表的第一个节点。对于链表来说，头节点不是必须的，它的作用只是为了方便解决某些实际问题；</p>
+</li>
+<li><p><code>首元节点</code>：由于头节点（也就是空节点）的缘故，链表中称第一个存有数据的节点为首元节点。首元节点只是对链表中第一个存有数据节点的一个称谓，没有实际意义；</p>
+</li>
+<li><p><code>其他节点</code>：链表中其他的节点；</p>
+</li>
+</ul>
+</li>
+</ol>
+<p>一个存储 <code>[1, 2, 3]</code> 的完整链表结构如图所示：</p>
+<p><img src="http://c.biancheng.net/uploads/allimg/190426/1G4211A5-4.gif" alt="链表"></p>
+<blockquote>
+<p>链表中有头节点时，头指针指向头节点；反之，若链表中没有头节点，则头指针指向首元节点。</p>
+</blockquote>
+<h3 id="链表的初始化"><a href="#链表的初始化" class="headerlink" title="链表的初始化"></a>链表的初始化</h3><p>我们设计的链表包含两个类：</p>
+<ul>
+<li><code>Node</code> 类用来表示节点；</li>
+<li><code>LinkedList</code> 类提供了插入的节点、删除节点、显示列表元素的方法，以及其他辅助方法。</li>
+</ul>
+<p><code>Node</code> 类包含两个属性，<code>element</code> 和 <code>next</code>。 </p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// Node 类</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Node</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">constructor</span>(element) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">this</span>.element = element; <span class="comment">// element 用来保存节点上的数据</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">this</span>.next = <span class="literal">null</span>; <span class="comment">// next 用来保存指向下一节点的指针</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">  &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<p><code>LinkedList</code> 类提供了对链表进行操作的方法。链表只有一个属性，那就是使用一个 <code>Node</code> 对象来保存该链表的头节点。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">LinkedList</span>(<span class="params"></span>) </span>&#123; </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="comment">// head 节点的 next 属性被初始化为 null，当有新元素插入时，next 会指向新的元素</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">this</span>.head = <span class="keyword">new</span> Node(<span class="string">'head'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">this</span>.find = find;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">this</span>.insert = insert;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">this</span>.findPrevious = findPrevious;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">this</span>.remove = remove;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">this</span>.display = display;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<h3 id="链表插入元素"><a href="#链表插入元素" class="headerlink" title="链表插入元素"></a>链表插入元素</h3><p>同顺序表一样，向链表中增添元素，根据添加位置不同，可分为以下 <code>3</code> 种情况：</p>
+<ul>
+<li>插入到链表的头部（头节点之后），作为首元节点；</li>
+<li>插入到链表中间的某个位置；</li>
+<li>插入到链表的最末端，作为链表中最后一个数据元素；</li>
+</ul>
+<p>虽然新元素的插入位置不固定，但是链表插入元素的思想是固定的，只需做以下两步操作，即可将新元素插入到指定的位置：</p>
+<ul>
+<li>将新节点的 <code>next</code> 指针指向插入位置后的节点；</li>
+<li>将插入位置前节点的 <code>next</code> 指针指向插入节点；</li>
+</ul>
+<p>例如，我们在链表 <code>[1, 2, 3, 4]</code> 的基础上分别实现在头部、中间部位、尾部插入新元素 <code>5</code>，其实现过程如下图所示：</p>
+<p><img src="http://c.biancheng.net/uploads/allimg/190426/1G513E01-0.gif" alt="链表插入节点"></p>
+<blockquote>
+<p><code>注意</code>：链表插入元素的操作必须是先步骤 <code>1</code>，再步骤 <code>2</code>；反之，若先执行步骤 <code>2</code>，除非再添加一个指针，作为插入位置后续链表的头指针，否则会导致插入位置后的这部分链表丢失，无法再实现步骤 <code>1</code>。</p>
+</blockquote>
+<p>创建一个辅助方法 <code>find()</code>，该方法遍历链表，查找给定数据。</p>
+<p><strong><code>find()</code> 方法实现：</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">find</span>(<span class="params">item</span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">var</span> currNode = <span class="keyword">this</span>.head; <span class="comment">// 创建一个新节点</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">while</span> (currNode.element != item) &#123; <span class="comment">// 如果当前节点数据不符合我们要找的节点</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">      currNode = currNode.next; <span class="comment">// 当前节点移动到一下节点</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">  &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">return</span> currNode;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+<p>一旦找到 <code>给定</code> 的节点，就可以将新节点插入链表了。首先，将新节点的 <code>next</code> 指针指向 <code>给定</code> 节点 <code>next</code> 指向的节点。然后设置 <code>给定</code> 节点的 <code>next</code> 属性指向新节点。</p>
+<p><strong><code>insert()</code> 方法的定义如下：</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">insert</span>(<span class="params">newElement, item</span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">var</span> newNode = <span class="keyword">new</span> Node(newElement);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">var</span> current = <span class="keyword">this</span>.find(item);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  <span class="comment">// 向链表插入节点 newNode</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">  newNode.next = current.next; <span class="comment">// 将新节点的 next 指针指向插入位置后的节点 （步骤 1）</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">  current.next = newNode; <span class="comment">// 设置插入位置前的 next 指针指向新节点（步骤2）</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<p>现在已经可以开始测试我们的链表实现了。然而在测试之前，先来定义一个 <code>display()</code> 方法，该方法用来显示链表中的元素：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">display</span>(<span class="params"></span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">var</span> currNode = <span class="keyword">this</span>.head;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">while</span>(!(currNode.next == <span class="literal">null</span>)) &#123; <span class="comment">// 当当前节点的 next 指针为 null 时 循环结束</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">//为了不显示头节点，程序只访问当前节点的下一个节点中保存的数据</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    <span class="built_in">console</span>.log(chrrNode.next.element);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    currNode = currNode.next;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">  &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<p><strong>测试程序：</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Node</span>(<span class="params">element</span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">this</span>.element = element;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">this</span>.next = <span class="literal">null</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">LinkedList</span>(<span class="params"></span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">this</span>.head = <span class="keyword">new</span> Node(<span class="string">'head'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">this</span>.find = find;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">this</span>.insert = insert;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">this</span>.findPrevious = findPrevious;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">this</span>.remove = remove;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">this</span>.display = display;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">find</span>(<span class="params">item</span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">var</span> currNode= <span class="keyword">this</span>.head;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">while</span>(currNode.element != item) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">    currNode = currNode.next;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">  &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">return</span> currNode;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">insert</span>(<span class="params">newElement, item</span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">var</span> newNode = <span class="keyword">new</span> Node(newElement);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">var</span> current = <span class="keyword">this</span>.find(item);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line">  newNode.next = current.next;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line">  current.next = newNode;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">28</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">29</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">findPrevious</span>(<span class="params"></span>) </span>&#123;&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">30</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">remove</span>(<span class="params"></span>) </span>&#123;&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">31</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">display</span>(<span class="params"></span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">32</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">var</span> currNode = <span class="keyword">this</span>.head;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">33</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">while</span>(!(currNode.next == <span class="literal">null</span>)) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">34</span></pre></td><td class="code"><pre><span class="line">    <span class="built_in">console</span>.log(currNode.next.element)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">35</span></pre></td><td class="code"><pre><span class="line">    currNode = currNode.next;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">36</span></pre></td><td class="code"><pre><span class="line">  &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">37</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">38</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> list = <span class="keyword">new</span> LinkedList();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">39</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">40</span></pre></td><td class="code"><pre><span class="line">list.insert(<span class="number">1</span>, <span class="string">'head'</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">41</span></pre></td><td class="code"><pre><span class="line">list.insert(<span class="number">2</span>, <span class="number">1</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">42</span></pre></td><td class="code"><pre><span class="line">list.insert(<span class="number">3</span>, <span class="number">2</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">43</span></pre></td><td class="code"><pre><span class="line">list.insert(<span class="number">4</span>, <span class="number">3</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">44</span></pre></td><td class="code"><pre><span class="line">list.display()</span></pre></td></tr></table></figure>
+<p>程序运行结果：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="number">1</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="number">2</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="number">3</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="number">4</span></span></pre></td></tr></table></figure>
+
+<h3 id="链表删除元素"><a href="#链表删除元素" class="headerlink" title="链表删除元素"></a>链表删除元素</h3><p>从链表中删除指定数据元素时，需要进行以下 <code>2</code> 步操作：</p>
+<ul>
+<li>需要先找到待删除节点前面的节点 <code>直接前驱节点</code>；</li>
+<li>找到这个节点后，修改它的 <code>next</code> 指针，使其不再指向待删除节点；</li>
+</ul>
+<p><img src="http://c.biancheng.net/uploads/allimg/190426/1G5134J2-1.gif" alt="删除节点"></p>
+<p>从链表中删除节点时，需要先找到待删除节点的<code>直接前驱节点</code>。找到这个节点后，修改它的 <code>next</code> 指针，我们可以定义一个方法 <code>findPrevious()</code>，来做这件事。</p>
+<p><code>findPrevious()</code> 方法遍历链表中的元素，检查每一个节点的 <code>直接后继节点</code> 中是否存储着待删除数据。如果找到，返回该节点（待删除节点的<code>直接前驱节点</code>）。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">findPrevious</span>(<span class="params">item</span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">var</span> currNode = <span class="keyword">this</span>.head;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">while</span>(!(currNode.next == <span class="literal">null</span>) &amp;&amp; currNode.next.element != item) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    currNode = currNode.next;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">  &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">return</span> currNode;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<p>删除节点的原理很简单，找到该节点的直接前驱节点 <code>prevNode</code> 后，修改它的 <code>next</code> 指针：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">prevNode.next = prevNode.next.next;</span></pre></td></tr></table></figure>
+
+<p><code>remove()</code> 方法的 <code>js</code> 实现：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">remove</span>(<span class="params">item</span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">var</span> prevNode = <span class="keyword">this</span>.findPrevious(item);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">if</span>(!(prevNode.next == <span class="literal">null</span>)) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    prevNode.next = prevNode.next.next;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">  &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+<p>测试程序：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">...</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> list = <span class="keyword">new</span> LinkedList();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">list.insert(<span class="number">1</span>, <span class="string">'head'</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">list.insert(<span class="number">2</span>, <span class="number">1</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">list.insert(<span class="number">3</span>, <span class="number">2</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">list.insert(<span class="number">4</span>, <span class="number">3</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">list.display() </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">list.remove(<span class="number">2</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">list.display()</span></pre></td></tr></table></figure>
+
+<p>程序运行结果：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 没调用 list.remove(2) 之前</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="number">1</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="number">2</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="number">3</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="number">4</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 调用list.remove(2)</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="number">1</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"><span class="number">3</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"><span class="number">4</span></span></pre></td></tr></table></figure>
+
+<h3 id="链表更改节点"><a href="#链表更改节点" class="headerlink" title="链表更改节点"></a>链表更改节点</h3><p>更新链表中的元素，只需通过遍历找到存储此元素的节点，对节点中的数据域做更改操作即可。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">change</span>(<span class="params">index, newElement</span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">var</span> currNode = <span class="keyword">this</span>.head;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i &lt;= index; i++) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    currNode = currNode.next;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">if</span> (currNode == <span class="literal">null</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">      <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'更新位置无效'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">      <span class="keyword">return</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">  &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">  currNode.element = newElement;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">return</span> currNode;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+
+
+<p>最后给出 <code>js</code> 实现的拥有基本操作 <code>增删改查</code> 的链表完整代码：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Node</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">constructor</span>(element) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">this</span>.element = element;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">this</span>.next = <span class="literal">null</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">  &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">LinkedList</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">constructor</span>() &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">this</span>.head = <span class="keyword">new</span> Node(<span class="string">'head'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">  &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">  <span class="comment">// 链表查找元素</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">  find(item) &#123; </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">var</span> currNode= <span class="keyword">this</span>.head;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">while</span>(currNode.element != item) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">      currNode = currNode.next;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">return</span> currNode;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">  &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">  <span class="comment">// 链表添加元素</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">  insert(newElement, item) &#123; </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">var</span> newNode = <span class="keyword">new</span> Node(newElement);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">var</span> current = <span class="keyword">this</span>.find(item);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">    newNode.next = current.next;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line">    current.next = newNode;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line">  &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line">  <span class="comment">// 链表查找直接前驱节点（辅助方法）</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">28</span></pre></td><td class="code"><pre><span class="line">  findPrevious(item) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">29</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">var</span> currNode = <span class="keyword">this</span>.head;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">30</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">while</span>(!(currNode.next == <span class="literal">null</span>) &amp;&amp; currNode.next.element != item) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">31</span></pre></td><td class="code"><pre><span class="line">      currNode = currNode.next;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">32</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">33</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">return</span> currNode;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">34</span></pre></td><td class="code"><pre><span class="line">  &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">35</span></pre></td><td class="code"><pre><span class="line">  <span class="comment">// 链表删除节点</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">36</span></pre></td><td class="code"><pre><span class="line">  remove(item) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">37</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">var</span> prevNode = <span class="keyword">this</span>.findPrevious(item);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">38</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">if</span>(!(prevNode.next == <span class="literal">null</span>)) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">39</span></pre></td><td class="code"><pre><span class="line">      prevNode.next = prevNode.next.next;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">40</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">41</span></pre></td><td class="code"><pre><span class="line">  &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">42</span></pre></td><td class="code"><pre><span class="line">  <span class="comment">// 链表更改节点</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">43</span></pre></td><td class="code"><pre><span class="line">  change(index, newElement) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">44</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">var</span> currNode = <span class="keyword">this</span>.head;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">45</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i &lt;= index; i++) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">46</span></pre></td><td class="code"><pre><span class="line">      currNode = currNode.next;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">47</span></pre></td><td class="code"><pre><span class="line">      <span class="keyword">if</span> (currNode == <span class="literal">null</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">48</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'更新位置无效'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">49</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">50</span></pre></td><td class="code"><pre><span class="line">      &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">51</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">52</span></pre></td><td class="code"><pre><span class="line">    currNode.element = newElement;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">53</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">return</span> currNode;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">54</span></pre></td><td class="code"><pre><span class="line">  &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">55</span></pre></td><td class="code"><pre><span class="line">  display() &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">56</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">var</span> currNode = <span class="keyword">this</span>.head;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">57</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">while</span>(!(currNode.next == <span class="literal">null</span>)) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">58</span></pre></td><td class="code"><pre><span class="line">      <span class="built_in">console</span>.log(currNode.next.element)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">59</span></pre></td><td class="code"><pre><span class="line">      currNode = currNode.next;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">60</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">61</span></pre></td><td class="code"><pre><span class="line">  &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">62</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">63</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">64</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> list = <span class="keyword">new</span> LinkedList();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">65</span></pre></td><td class="code"><pre><span class="line">list.insert(<span class="number">1</span>, <span class="string">'head'</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">66</span></pre></td><td class="code"><pre><span class="line">list.insert(<span class="number">2</span>, <span class="number">1</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">67</span></pre></td><td class="code"><pre><span class="line">list.insert(<span class="number">3</span>, <span class="number">2</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">68</span></pre></td><td class="code"><pre><span class="line">list.insert(<span class="number">4</span>, <span class="number">3</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">69</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="string">'初始化链表：'</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">70</span></pre></td><td class="code"><pre><span class="line">list.display() <span class="comment">// 1, 2, 3, 4</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">71</span></pre></td><td class="code"><pre><span class="line">list.remove(<span class="number">2</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">72</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="string">'删除数据为 2 的节点： '</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">73</span></pre></td><td class="code"><pre><span class="line">list.display() <span class="comment">// 1, 3, 4</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">74</span></pre></td><td class="code"><pre><span class="line">list.change(<span class="number">2</span>, <span class="number">6</span>) </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">75</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="string">'将下标为 2 的 节点数据更改为 6：'</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">76</span></pre></td><td class="code"><pre><span class="line">list.display() <span class="comment">// 1, 3, 6</span></span></pre></td></tr></table></figure>
+<p>整体程序运行结果：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">初始化链表：</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="number">1</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="number">2</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="number">3</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="number">4</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">删除数据为 <span class="number">2</span> 的节点： </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="number">1</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"><span class="number">3</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"><span class="number">4</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">将下标为 <span class="number">2</span> 的 节点数据更改为 <span class="number">6</span>：</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line"><span class="number">1</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line"><span class="number">3</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line"><span class="number">6</span></span></pre></td></tr></table></figure>
+
+<p>下章节：</p>
+<h3 id="静态链表"><a href="#静态链表" class="headerlink" title="静态链表"></a>静态链表</h3><h3 id="双向链表"><a href="#双向链表" class="headerlink" title="双向链表"></a>双向链表</h3><h3 id="循环链表"><a href="#循环链表" class="headerlink" title="循环链表"></a>循环链表</h3><h3 id="双向循环链表"><a href="#双向循环链表" class="headerlink" title="双向循环链表"></a>双向循环链表</h3><h2 id="栈和队列"><a href="#栈和队列" class="headerlink" title="栈和队列"></a>栈和队列</h2><p>栈和队列隶属于线性表，是特殊的线性表，因为它们对线性表中元素的进出做了明确的要求。</p>
+<p><strong>栈</strong>中的元素只能从线性表的一端进出（另一端封死），且要遵循 <strong>「先入后出」</strong> 的原则，即先进栈的元素后出栈。</p>
+<p><img src="https://imgkr.cn-bj.ufileos.com/71d4e843-0bcf-4466-9c37-9caea2daa5f7.png" alt="栈"></p>
+<p>栈结构如上图所示，像一个木桶，栈中含有 <code>3</code> 个元素，分别是 <code>A</code>、<code>B</code> 和 <code>C</code>，从在栈中的状态可以看出 <code>A</code> 最先进的栈，然后 <code>B</code> 进栈，最后 <code>C</code> 进栈。根据「先进后出」的原则，<code>3</code> 个元素出栈的顺序应该是：<code>C</code> 最先出栈，然后 <code>B</code> 出栈，最后才是 <code>A</code> 出栈。</p>
+<p><strong>队列</strong>中的元素只能从线性表的一端进，从另一端出，且要遵循「先入先出」的特点，即先进队列的元素也要先出队列。</p>
+<p><img src="https://imgkr.cn-bj.ufileos.com/a95fd07c-fc8d-436d-aa88-515ab936fcce.png" alt="队列"></p>
+<p>队列结构如上图所示，队列中有 <code>3</code> 个元素，分别是 <code>A</code>、<code>B</code> 和 <code>C</code>，从在队列中的状态可以看出是 <code>A</code> 先进队列，然后 <code>B</code> 进，最后 <code>C</code> 进。根据「先进先出」的原则，<code>3</code> 个元素出队列的顺序应该是 <code>A</code> 最先出队列，然后 <code>B</code> 出，最后 <code>C</code> 出。</p>
+<h1 id="树存储结构"><a href="#树存储结构" class="headerlink" title="树存储结构"></a>树存储结构</h1><p>树存储结构适合存储具有「一对多」关系的结构。</p>
+<p><img src="https://imgkr.cn-bj.ufileos.com/9ad11f9a-71cc-4558-a926-51daf8e88f1c.png" alt="树结构"></p>
+<p>如图所示，其中张平只有一个父亲，但他却有两（多）个孩子，这就是「一对多」的关系，满足这种关系的数据可以使用树存储结构。</p>
+<h1 id="图存储结构"><a href="#图存储结构" class="headerlink" title="图存储结构"></a>图存储结构</h1><p>图存储结构适合存储具有「多对多」关系的结构。</p>
+<p><img src="https://imgkr.cn-bj.ufileos.com/7a5f9d16-288a-4988-abe7-b111754762bd.png" alt="图存储"></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div></div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechart.png" alt="破晓 L 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag"># 数据结构</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/01/15/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" rel="next" title="设计模式">
+                <i class="fa fa-chevron-left"></i> 设计模式
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/01/19/index/" rel="prev" title="index">
+                index <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpg"
+                alt="破晓 L" />
+            
+              <p class="site-author-name" itemprop="name">破晓 L</p>
+              <p class="site-description motion-element" itemprop="description">桃李不言 下自成蹊</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="http://your-feed-url" target="_blank" rel="alternate noopener">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/xingleizhao/Front-end-interview-API" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i></a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:zxljoly@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope-square"></i></a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#数据结构的概念"><span class="nav-number">1.</span> <span class="nav-text">数据结构的概念</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#存储结构"><span class="nav-number">2.</span> <span class="nav-text">存储结构</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#线性表"><span class="nav-number">3.</span> <span class="nav-text">线性表</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#前驱和后继"><span class="nav-number">3.1.</span> <span class="nav-text">前驱和后继</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#顺序表"><span class="nav-number">3.2.</span> <span class="nav-text">顺序表</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#顺序表的初始化"><span class="nav-number">3.2.1.</span> <span class="nav-text">顺序表的初始化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#顺序表插入元素"><span class="nav-number">3.2.2.</span> <span class="nav-text">顺序表插入元素</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#顺序表删除元素"><span class="nav-number">3.2.3.</span> <span class="nav-text">顺序表删除元素</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#顺序表查找元素"><span class="nav-number">3.2.4.</span> <span class="nav-text">顺序表查找元素</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#顺序表更改元素"><span class="nav-number">3.2.5.</span> <span class="nav-text">顺序表更改元素</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#顺序表（数组）的缺点"><span class="nav-number">3.2.6.</span> <span class="nav-text">顺序表（数组）的缺点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#链表"><span class="nav-number">3.3.</span> <span class="nav-text">链表</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#链表的节点"><span class="nav-number">3.3.1.</span> <span class="nav-text">链表的节点</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#头节点、头指针和首元节点"><span class="nav-number">3.3.1.1.</span> <span class="nav-text">头节点、头指针和首元节点</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#链表的初始化"><span class="nav-number">3.3.2.</span> <span class="nav-text">链表的初始化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#链表插入元素"><span class="nav-number">3.3.3.</span> <span class="nav-text">链表插入元素</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#链表删除元素"><span class="nav-number">3.3.4.</span> <span class="nav-text">链表删除元素</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#链表更改节点"><span class="nav-number">3.3.5.</span> <span class="nav-text">链表更改节点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#静态链表"><span class="nav-number">3.3.6.</span> <span class="nav-text">静态链表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#双向链表"><span class="nav-number">3.3.7.</span> <span class="nav-text">双向链表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#循环链表"><span class="nav-number">3.3.8.</span> <span class="nav-text">循环链表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#双向循环链表"><span class="nav-number">3.3.9.</span> <span class="nav-text">双向循环链表</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#栈和队列"><span class="nav-number">3.4.</span> <span class="nav-text">栈和队列</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#树存储结构"><span class="nav-number">4.</span> <span class="nav-text">树存储结构</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#图存储结构"><span class="nav-number">5.</span> <span class="nav-text">图存储结构</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">破晓 L</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

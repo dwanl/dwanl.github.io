@@ -1,0 +1,976 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="设计模式," />
+
+
+
+
+
+  <link rel="alternate" href="http://your-feed-url" title="塞纳河左岸" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="设计模式设计模式的本质是面向对象设计原则的实际运用，是对类的封装性、继承性和多态性已经类的关联关系和组合关系的的充分理解。  单例（Singleton）模式： 某个类只能生成一个实例，该类提供了一个全局访问点供外部获取该实例，其拓展是有限多例模式。  原型（Prototype）模式： 将一个对象作为原型，通过对其进行复制而克隆出多个和原型类似的新实例。  工厂方法（Factory Method）模">
+<meta name="keywords" content="设计模式">
+<meta property="og:type" content="article">
+<meta property="og:title" content="设计模式">
+<meta property="og:url" content="http:&#x2F;&#x2F;www.webinfoq.cn&#x2F;2020&#x2F;01&#x2F;15&#x2F;%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F&#x2F;index.html">
+<meta property="og:site_name" content="塞纳河左岸">
+<meta property="og:description" content="设计模式设计模式的本质是面向对象设计原则的实际运用，是对类的封装性、继承性和多态性已经类的关联关系和组合关系的的充分理解。  单例（Singleton）模式： 某个类只能生成一个实例，该类提供了一个全局访问点供外部获取该实例，其拓展是有限多例模式。  原型（Prototype）模式： 将一个对象作为原型，通过对其进行复制而克隆出多个和原型类似的新实例。  工厂方法（Factory Method）模">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https:&#x2F;&#x2F;mmbiz.qpic.cn&#x2F;mmbiz_png&#x2F;qtCIoP3pd2TUwQu5U8wvOCMlADtyNib8rRoBicM7vWRJTvkZXbgjibibqEJQic9XCljLVvhVQ1dSkAIhlsc5vCSWV9w&#x2F;0?wx_fmt&#x3D;png">
+<meta property="og:image" content="https:&#x2F;&#x2F;mmbiz.qpic.cn&#x2F;mmbiz_png&#x2F;qtCIoP3pd2TUwQu5U8wvOCMlADtyNib8rTMicgYgOhowicfswmIKRD7yHcWeVl5Or4Zl36pe8nGjEPNHJmu4WTLiag&#x2F;0?wx_fmt&#x3D;png">
+<meta property="og:image" content="https:&#x2F;&#x2F;mmbiz.qpic.cn&#x2F;mmbiz_png&#x2F;qtCIoP3pd2TUwQu5U8wvOCMlADtyNib8ru5icLianLXWa27QA782dRYPdMdYC3Q0gOfibfIAmuBlZo4ecWTQDTPJYw&#x2F;0?wx_fmt&#x3D;png">
+<meta property="og:image" content="https:&#x2F;&#x2F;mmbiz.qpic.cn&#x2F;mmbiz_png&#x2F;qtCIoP3pd2TUwQu5U8wvOCMlADtyNib8rvRFSFp1lQBwrP7z20MWK18DU0t6AGM0r5OEmSYiaWKPONodaOlpaUTw&#x2F;0?wx_fmt&#x3D;png">
+<meta property="og:updated_time" content="2020-01-17T02:30:31.180Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;mmbiz.qpic.cn&#x2F;mmbiz_png&#x2F;qtCIoP3pd2TUwQu5U8wvOCMlADtyNib8rRoBicM7vWRJTvkZXbgjibibqEJQic9XCljLVvhVQ1dSkAIhlsc5vCSWV9w&#x2F;0?wx_fmt&#x3D;png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":10,"b2t":true,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.webinfoq.cn/2020/01/15/设计模式/"/>
+
+
+
+
+
+  <title>设计模式 | 塞纳河左岸</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">塞纳河左岸</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Rive gauche</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-university"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.webinfoq.cn/2020/01/15/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="破晓 L">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="塞纳河左岸">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">设计模式</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-01-15T09:55:21+08:00">
+                2020-01-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index">
+                    <span itemprop="name">JavaScript</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="设计模式"><a href="#设计模式" class="headerlink" title="设计模式"></a>设计模式</h1><p>设计模式的本质是面向对象设计原则的实际运用，是对类的封装性、继承性和多态性已经类的关联关系和组合关系的的充分理解。</p>
+<ol>
+<li><p><strong>单例（Singleton）模式：</strong> 某个类只能生成一个实例，该类提供了一个全局访问点供外部获取该实例，其拓展是有限多例模式。</p>
+</li>
+<li><p><strong>原型（Prototype）模式：</strong> 将一个对象作为原型，通过对其进行复制而克隆出多个和原型类似的新实例。</p>
+</li>
+<li><p><strong>工厂方法（Factory Method）模式：</strong> 定义一个用于创建产品的接口，由子类决定生产什么产品。</p>
+</li>
+<li><p><strong>抽象工厂（AbstractFactory）模式：</strong> 提供一个创建产品族的接口，其每个子类可以生产一系列相关的产品。</p>
+</li>
+<li><p><strong>建造者（Builder）模式：</strong> 将一个复杂对象分解成多个相对简单的部分，然后根据不同需要分别创建它们，最后构建成该复杂对象。</p>
+</li>
+<li><p><strong>代理（Proxy）模式：</strong> 为某对象提供一种代理以控制对该对象的访问。即客户端通过代理间接地访问该对象，从而限制、增强或修改该对象的一些特性。</p>
+</li>
+<li><p><strong>适配器（Adapter）模式：</strong> 将一个类的接口转换成客户希望的另外一个接口，使得原本由于接口不兼容而不能一起工作的那些类能一起工作。</p>
+</li>
+<li><p><strong>桥接（Bridge）模式：</strong> 将抽象与实现分离，使它们可以独立变化。它是用组合关系代替继承关系来实现，从而降低了抽象和实现这两个可变维度的耦合度。</p>
+</li>
+<li><p><strong>装饰（Decorator）模式：</strong> 动态的给对象增加一些职责，即增加其额外的功能。</p>
+</li>
+<li><p><strong>外观（Facade）模式：</strong> 为多个复杂的子系统提供一个一致的接口，使这些子系统更加容易被访问。</p>
+</li>
+<li><p><strong>享元（Flyweight）模式：</strong> 运用共享技术来有效地支持大量细粒度对象的复用。</p>
+</li>
+<li><p><strong>组合（Composite）模式：</strong> 将对象组合成树状层次结构，使用户对单个对象和组合对象具有一致的访问性。</p>
+</li>
+<li><p><strong>模板方法（TemplateMethod）模式：</strong> 定义一个操作中的算法骨架，而将算法的一些步骤延迟到子类中，使得子类可以不改变该算法结构的情况下重定义该算法的某些特定步骤。</p>
+</li>
+<li><p><strong>策略（Strategy）模式：</strong> 定义了一系列算法，并将每个算法封装起来，使它们可以相互替换，且算法的改变不会影响使用算法的客户。</p>
+</li>
+<li><p><strong>命令（Command）模式：</strong> 将一个请求封装为一个对象，使发出请求的责任和执行请求的责任分割开。</p>
+</li>
+<li><p><strong>职责链（Chain of Responsibility）模式：</strong> 把请求从链中的一个对象传到下一个对象，直到请求被响应为止。通过这种方式去除对象之间的耦合。</p>
+</li>
+<li><p><strong>状态（State）模式：</strong> 允许一个对象在其内部状态发生改变时改变其行为能力。</p>
+</li>
+<li><p><strong>观察者（Observer）模式：</strong> 多个对象间存在一对多关系，当一个对象发生改变时，把这种改变通知给其他多个对象，从而影响其他对象的行为。</p>
+</li>
+<li><p><strong>中介者（Mediator）模式：</strong> 定义一个中介对象来简化原有对象之间的交互关系，降低系统中对象间的耦合度，使原有对象之间不必相互了解。</p>
+</li>
+<li><p><strong>迭代器（Iterator）模式：</strong> 提供一种方法来顺序访问聚合对象中的一系列数据，而不暴露聚合对象的内部表示。</p>
+</li>
+<li><p><strong>访问者（Visitor）模式：</strong> 在不改变集合元素的前提下，为一个集合中的每个元素提供多种访问方式，即每个元素有多个访问者对象访问。</p>
+</li>
+<li><p><strong>备忘录（Memento）模式：</strong> 在不破坏封装性的前提下，获取并保存一个对象的内部状态，以便以后恢复它。</p>
+</li>
+<li><p><strong>解释器（Interpreter）模式：</strong> 提供如何定义语言的文法，以及对语言句子的解释方法，即解释器。</p>
+</li>
+</ol>
+<h2 id="单例模式"><a href="#单例模式" class="headerlink" title="单例模式"></a>单例模式</h2><p>为了节省内存资源，保证数据内容的一致性。</p>
+<p>一个类只有一个实例（创建的多个实例子都相等）。</p>
+<p>该单例对象必须由单例类自行创建。</p>
+<p>单例类对外提供一个访问该单例的全局访问点。</p>
+<h3 id="代码演示"><a href="#代码演示" class="headerlink" title="代码演示"></a>代码演示</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SingleCase</span>() </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  login() &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="built_in">console</span>.log(<span class="string">'login...'</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">SingleCase.getInstance = (<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">let</span> instance;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">if</span>(!instance) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">      instance = <span class="keyword">new</span> SingleCase();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">return</span> instance;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">  &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">&#125;)();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> obj1 = SingleCase.getInstance();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> obj2 = SingleCase.getInstance();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">obj1 === obj2 <span class="comment">// true</span></span></pre></td></tr></table></figure>
+<h3 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h3><ul>
+<li><code>jQuery</code> - 引入多个 <code>jQuery</code> 也只有一个 <code>$</code>。<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(<span class="built_in">window</span>.jQuery != <span class="literal">null</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">return</span> <span class="built_in">window</span>.jQuery</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">&#125; <span class="keyword">else</span> &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  <span class="comment">// 初始化</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure></li>
+<li><code>vuex</code> 和 <code>redux</code> 中的 <code>store</code>。</li>
+</ul>
+<h3 id="设计原则验证"><a href="#设计原则验证" class="headerlink" title="设计原则验证"></a>设计原则验证</h3><ul>
+<li>符合单一职责原则，只实例化唯一的对象</li>
+<li>没法具体开放封闭原则，但是绝对不违反开放封闭原则</li>
+</ul>
+<h2 id="工厂模式"><a href="#工厂模式" class="headerlink" title="工厂模式"></a>工厂模式</h2><p>不对外暴露创建逻辑，对 <code>new</code> 操作进行封装。</p>
+<h3 id="代码演示-1"><a href="#代码演示-1" class="headerlink" title="代码演示"></a>代码演示</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Product</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">constructor</span>(name) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">this</span>.name = name;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">  init() &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.name);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">  &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Creator</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">  create(name) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> Product(name);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">  &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> creator = <span class="keyword">new</span> Creator();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> abc = creator.create(<span class="string">'abc'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">abc.init(); <span class="comment">// abc</span></span></pre></td></tr></table></figure>
+
+<h3 id="应用场景-1"><a href="#应用场景-1" class="headerlink" title="应用场景"></a>应用场景</h3><ul>
+<li><code>jQuery</code> - <code>$(&#39;div&#39;)</code>。</li>
+<li><code>React.createElement</code>。</li>
+<li><code>vue</code> 异步组件。</li>
+</ul>
+<h3 id="设计原则验证-1"><a href="#设计原则验证-1" class="headerlink" title="设计原则验证"></a>设计原则验证</h3><ul>
+<li>工厂函数和创建者分离</li>
+<li>符合开放封闭原则</li>
+</ul>
+<h2 id="适配器模式"><a href="#适配器模式" class="headerlink" title="适配器模式"></a>适配器模式</h2><p><img src="https://mmbiz.qpic.cn/mmbiz_png/qtCIoP3pd2TUwQu5U8wvOCMlADtyNib8rRoBicM7vWRJTvkZXbgjibibqEJQic9XCljLVvhVQ1dSkAIhlsc5vCSWV9w/0?wx_fmt=png" alt="装饰器模式"></p>
+<p>生活场景中的插座适配。</p>
+<p>将一个类（对象）的接口（方法或者属性）转化成另外一个接口以满足用户需求，使类（对象）之间接口不兼容问题通过适配器得以解决。</p>
+<p><strong>包含角色：</strong></p>
+<ul>
+<li>目标类（Target）- 定义客户需要的接口。</li>
+<li>被适配类（Adaptee）- 定义需要适配的接口。</li>
+<li>适配器类（Adapter）</li>
+</ul>
+<h3 id="代码演示-2"><a href="#代码演示-2" class="headerlink" title="代码演示"></a>代码演示</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Adaptee</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="comment">// 需要适配</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  specificRequest() &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">return</span> <span class="string">'德国标准的插头'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">  &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Tagert</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">constructor</span>() &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">this</span>.adapter = <span class="keyword">new</span> Adaptee();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">  &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">  request() &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">let</span> info = <span class="keyword">this</span>.adapter.specificRequest();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">return</span> <span class="string">`<span class="subst">$&#123;info&#125;</span> -&gt; 转化器 -&gt; 国标插头`</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">  &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> target = <span class="keyword">new</span> Target();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">target.request();</span></pre></td></tr></table></figure>
+
+<h3 id="应用场景-2"><a href="#应用场景-2" class="headerlink" title="应用场景"></a>应用场景</h3><ul>
+<li>封装旧接口</li>
+</ul>
+<h3 id="设计原则验证-2"><a href="#设计原则验证-2" class="headerlink" title="设计原则验证"></a>设计原则验证</h3><ul>
+<li>将现有接口和使用者进行分离</li>
+<li>符合开放封闭原则</li>
+</ul>
+<h2 id="装饰器模式"><a href="#装饰器模式" class="headerlink" title="装饰器模式"></a>装饰器模式</h2><p><img src="https://mmbiz.qpic.cn/mmbiz_png/qtCIoP3pd2TUwQu5U8wvOCMlADtyNib8rTMicgYgOhowicfswmIKRD7yHcWeVl5Or4Zl36pe8nGjEPNHJmu4WTLiag/0?wx_fmt=png" alt="装饰器模式"><br>生活场景中的手机壳。</p>
+<p>为对象添加新功能，不改变其原有结构和功能。</p>
+<h3 id="代码演示-3"><a href="#代码演示-3" class="headerlink" title="代码演示"></a>代码演示</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Circle</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  draw() &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="built_in">console</span>.log(<span class="string">'画一个原型'</span>) </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Decorator</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">constructor</span>(circle) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">this</span>.circle = circle;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">  &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">  draw() &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">this</span>.circle.draw();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">this</span>.setColor(circle);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">  &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">  setColor(circle) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">    <span class="built_in">console</span>.log(<span class="string">'设置颜色'</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">  &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> circle = <span class="keyword">new</span> Circle();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">circle.draw()</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> decorator = <span class="keyword">new</span> Decorator(circle);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">decorator.draw()</span></pre></td></tr></table></figure>
+
+<h3 id="应用场景-3"><a href="#应用场景-3" class="headerlink" title="应用场景"></a>应用场景</h3><ul>
+<li><p><code>ES7</code> 装饰器</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">@decorator</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span> </span>&#123;&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 等同于</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span> </span>&#123;&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">A = decorator(A) || A;</span></pre></td></tr></table></figure></li>
+<li><p><code>core-decorators</code> - 第三方开源</p>
+</li>
+</ul>
+<h3 id="设计原则验证-3"><a href="#设计原则验证-3" class="headerlink" title="设计原则验证"></a>设计原则验证</h3><ul>
+<li>将现有对象和装饰器分离，两者独立存在</li>
+<li>符合开放封闭原则</li>
+</ul>
+<h2 id="代理模式"><a href="#代理模式" class="headerlink" title="代理模式"></a>代理模式</h2><p><img src="https://mmbiz.qpic.cn/mmbiz_png/qtCIoP3pd2TUwQu5U8wvOCMlADtyNib8ru5icLianLXWa27QA782dRYPdMdYC3Q0gOfibfIAmuBlZo4ecWTQDTPJYw/0?wx_fmt=png" alt="代理模式"></p>
+<p>生活场景：翻墙访问国外网站，商品代理商。</p>
+<p>使用者无权访问目标对象，中间加代理，通过代理做授权和控制。</p>
+<h3 id="代码演示-4"><a href="#代码演示-4" class="headerlink" title="代码演示"></a>代码演示</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 目标类</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ReadImage</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">constructor</span>(fileName) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">this</span>.fileName = fileName;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">this</span>.loadFromDisk();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">  &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">  display() &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">    <span class="built_in">console</span>.log(<span class="string">'display...'</span> + <span class="keyword">this</span>.fileName);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">  &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">  loadFromDisk() &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">    <span class="built_in">console</span>.log(<span class="string">'loading...'</span> + <span class="keyword">this</span>.fileName);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">  &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 代理类</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ProxyImage</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">constructor</span>(fileName) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">this</span>.realImage = <span class="keyword">new</span> ReadImage(fileName);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">  &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">  display() &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">this</span>.realImage.display();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">  &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> proxyImage = <span class="keyword">new</span> ProxyImage(<span class="string">'1.png'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line">proxyImage.display();</span></pre></td></tr></table></figure>
+
+<h3 id="应用场景-4"><a href="#应用场景-4" class="headerlink" title="应用场景"></a>应用场景</h3><ul>
+<li>网页事件代理 - <code>addEventListener</code></li>
+<li><code>jQuery</code> - <code>$.proxy</code></li>
+<li><code>ES6</code> 中的 <code>Proxy</code><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 明星</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> star = &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  name: <span class="string">'李连杰'</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  age: <span class="string">'28'</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">  phone: <span class="string">'13100000000'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 经纪人</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> agentStar = <span class="keyword">new</span> <span class="built_in">Proxy</span>(star, &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">get</span>: function(target, key) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">if</span>(key === <span class="string">'phone'</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">      <span class="comment">// 返回经纪人自己的电话</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">      <span class="keyword">return</span> <span class="string">'13811111111'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">if</span>(key === <span class="string">'price'</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">      <span class="comment">// 明星不报价 经纪人报价 </span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">      <span class="keyword">return</span> <span class="number">120000</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">return</span> target[key];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">  &#125;,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">set</span>: function(taget, key, value) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">if</span>(key === <span class="string">'customPrice'</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">      <span class="keyword">if</span>(value &lt; <span class="number">100000</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'价格太低，最低10w'</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line">      &#125; <span class="keyword">else</span> &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line">        target[key] = value;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">28</span></pre></td><td class="code"><pre><span class="line">      &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">29</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">30</span></pre></td><td class="code"><pre><span class="line">  &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">31</span></pre></td><td class="code"><pre><span class="line">&#125;)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">32</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">33</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 获取明星信息</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">34</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(agentStar.name); <span class="comment">// 李连杰</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">35</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(agentStar.age); <span class="comment">// 28</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">36</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(agentStar.phone); <span class="comment">// 经纪人的电话 13811111111</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">37</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(agentStar.price); <span class="comment">// 经纪人报价 120000</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">38</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">39</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 报价</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">40</span></pre></td><td class="code"><pre><span class="line">agentStar.customPrice = <span class="number">150000</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">41</span></pre></td><td class="code"><pre><span class="line">agentStar.customPrice = <span class="number">90000</span>; <span class="comment">// 报错 价格太低 最少10w</span></span></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h3 id="设计原则验证-4"><a href="#设计原则验证-4" class="headerlink" title="设计原则验证"></a>设计原则验证</h3><ul>
+<li>代理类和目标类分离，隔离开目标类和使用者</li>
+<li>符合开放封闭原则</li>
+</ul>
+<h2 id="外观模式"><a href="#外观模式" class="headerlink" title="外观模式"></a>外观模式</h2><p><img src="https://mmbiz.qpic.cn/mmbiz_png/qtCIoP3pd2TUwQu5U8wvOCMlADtyNib8rvRFSFp1lQBwrP7z20MWK18DU0t6AGM0r5OEmSYiaWKPONodaOlpaUTw/0?wx_fmt=png" alt="外观模式"></p>
+<p>为子系统中的一组接口提供了一个高层接口，使用者使用这个高层接口。</p>
+<blockquote>
+<p>不符合单一职责原则和开放封闭原则，谨慎使用。</p>
+</blockquote>
+<h2 id="观察者模式"><a href="#观察者模式" class="headerlink" title="观察者模式"></a>观察者模式</h2><p>它是一种一对多的关系，让多个观察者（Observer）同时监听一个主题（Subject），这个主题也就是被观察者（Observable），被观察者的状态发生变化时就会通知所有的观察者，使得它们能够接收到更新的内容。</p>
+<h3 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 定义一个主题（被观察者）</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Subject</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">constructor</span>() &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">this</span>.observers = []; <span class="comment">// 记录观察者</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">this</span>.state = <span class="number">0</span>; </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">  &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">  getState() &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.state;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">  &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">  setState(state) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">this</span>.state = state;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">this</span>.notify();  <span class="comment">// 通知观察者更新了</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">  &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">  attach(observer) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">this</span>.observers.push(observer); <span class="comment">// 对观察者进行登记</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">  &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">  notify() &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">this</span>.observers.forEach(<span class="function"><span class="params">observer</span> =&gt;</span> &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">      observer.update();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">    &#125;)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">  &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 定义观察者类</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Observer</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">constructor</span>(name, subject) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">this</span>.name = name;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">28</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">this</span>.subject = subject; </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">29</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">this</span>.subject.attach(<span class="keyword">this</span>); <span class="comment">// 向登记处添加观察者实体</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">30</span></pre></td><td class="code"><pre><span class="line">  &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">31</span></pre></td><td class="code"><pre><span class="line">  update() &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">32</span></pre></td><td class="code"><pre><span class="line">    <span class="built_in">console</span>.log(<span class="string">`<span class="subst">$&#123;<span class="keyword">this</span>.name&#125;</span> update, state: <span class="subst">$&#123;<span class="keyword">this</span>.subject.getState()&#125;</span>`</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">33</span></pre></td><td class="code"><pre><span class="line">  &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">34</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">35</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">36</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 创建一个主题</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">37</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> subject = <span class="keyword">new</span> Subject();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">38</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">39</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 创建三个观察者</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">40</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> observer$<span class="number">1</span> = <span class="keyword">new</span> Observer(<span class="string">'A'</span>, subject);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">41</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> observer$<span class="number">2</span> = <span class="keyword">new</span> Observer(<span class="string">'B'</span>, subject);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">42</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> observer$<span class="number">3</span> = <span class="keyword">new</span> Observer(<span class="string">'C'</span>, subject);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">43</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">44</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 更新主题</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">45</span></pre></td><td class="code"><pre><span class="line">subject.setState(<span class="number">1</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">46</span></pre></td><td class="code"><pre><span class="line">subject.setState(<span class="number">2</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">47</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">48</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// "observer$1 update, state: 1"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">49</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// "observer$2 update, state: 1"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">50</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// "observer$3 update, state: 1"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">51</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// "observer$1 update, state: 2"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">52</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// "observer$2 update, state: 2"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">53</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// "observer$3 update, state: 2"</span></span></pre></td></tr></table></figure>
+
+<blockquote>
+<p>更多阅读：<a href="https://zhuanlan.zhihu.com/p/51357583" target="_blank" rel="noopener">观察者模式 vs 发布订阅模式</a></p>
+</blockquote>
+<h3 id="应用场景-5"><a href="#应用场景-5" class="headerlink" title="应用场景"></a>应用场景</h3><ul>
+<li><a href="https://cn.vuejs.org/v2/guide/reactivity.html" target="_blank" rel="noopener">vue 响应式原理</a></li>
+<li><code>react</code> 事件监听</li>
+<li><a href="https://blog.csdn.net/liangklfang/article/details/74025364" target="_blank" rel="noopener">react 兄弟组件传值 redux</a></li>
+</ul>
+<h3 id="设计原则验证-5"><a href="#设计原则验证-5" class="headerlink" title="设计原则验证"></a>设计原则验证</h3><ul>
+<li>主题和观察者分离，不是主动触发而是被动监听</li>
+<li>符合开放封闭原则</li>
+</ul>
+<h2 id="迭代器模式"><a href="#迭代器模式" class="headerlink" title="迭代器模式"></a>迭代器模式</h2><p>迭代器（Iterator）模式又叫游标（Sursor）模式，迭代器具有 <code>next()</code> 方法，可以顺序访问一个聚合对象中的各个元素，而不需要暴露该对象的内部表现。</p>
+<h3 id="代码演示-5"><a href="#代码演示-5" class="headerlink" title="代码演示"></a>代码演示</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 迭代器对象</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Iterator</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">constructor</span>(container) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">this</span>.list = container.list;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">this</span>.index = <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">  &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">  next() &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">if</span>(<span class="keyword">this</span>.hasNext()) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">      <span class="keyword">return</span> &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">        value: <span class="keyword">this</span>.list[<span class="keyword">this</span>.index++],</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">        done: <span class="literal">false</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">      &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">return</span> &#123;<span class="attr">value</span>: <span class="literal">null</span>, <span class="attr">done</span>: <span class="literal">true</span>&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">  &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">  hasNext() &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">if</span>(<span class="keyword">this</span>.index &gt;= <span class="keyword">this</span>.list.length) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">      <span class="keyword">return</span> <span class="literal">false</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">  &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 目标对象</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Container</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">constructor</span>(list) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">28</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">this</span>.list = list;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">29</span></pre></td><td class="code"><pre><span class="line">  &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">30</span></pre></td><td class="code"><pre><span class="line">  getIterator() &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">31</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> Iterator(<span class="keyword">this</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">32</span></pre></td><td class="code"><pre><span class="line">  &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">33</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">34</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">35</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> container = <span class="keyword">new</span> Container([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">36</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> iterator = container.getIterator();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">37</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">38</span></pre></td><td class="code"><pre><span class="line">iterator.next();  <span class="comment">// &#123;value: 1, done: false&#125;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">39</span></pre></td><td class="code"><pre><span class="line">iterator.next();  <span class="comment">// &#123;value: 2, done: false&#125;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">40</span></pre></td><td class="code"><pre><span class="line">iterator.next();  <span class="comment">// &#123;value: 3, done: false&#125;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">41</span></pre></td><td class="code"><pre><span class="line">iterator.next();  <span class="comment">// &#123;value: 4, done: false&#125;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">42</span></pre></td><td class="code"><pre><span class="line">iterator.next();  <span class="comment">// &#123;value: 5, done: false&#125;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">43</span></pre></td><td class="code"><pre><span class="line">iterator.next();  <span class="comment">// &#123;value: null, done: true&#125;</span></span></pre></td></tr></table></figure>
+
+<h3 id="应用场景-6"><a href="#应用场景-6" class="headerlink" title="应用场景"></a>应用场景</h3><ul>
+<li><code>jQuery</code> - <code>each()</code></li>
+<li>ES6 Iterator</li>
+</ul>
+<h3 id="设计原则验证-6"><a href="#设计原则验证-6" class="headerlink" title="设计原则验证"></a>设计原则验证</h3><ul>
+<li>迭代器对象和目标对象分离</li>
+<li>迭代器将使用者与目标对象隔离开</li>
+<li>符合开放封闭原则</li>
+</ul>
+<h2 id="状态模式"><a href="#状态模式" class="headerlink" title="状态模式"></a>状态模式</h2><p>生活场景：交通信号灯不同颜色的变化</p>
+<p>对有状态的对象，把复杂的「判断逻辑」提取到不同的状态对象中，允许状态对象在其内部状态发生改变时改变其行为。</p>
+<h3 id="代码实现-1"><a href="#代码实现-1" class="headerlink" title="代码实现"></a>代码实现</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 状态对象</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">State</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">constructor</span>(color) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">this</span>.color = color;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">  &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">  handle(context) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">    <span class="built_in">console</span>.log(<span class="string">`turn to <span class="subst">$&#123;<span class="keyword">this</span>.color&#125;</span> light`</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">// 改变行为</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">    context.setState(<span class="keyword">this</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">  &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 主题对象</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Context</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">constructor</span>() &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">this</span>.state = <span class="literal">null</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">  &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">  getState() &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.state;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">  &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">  setState(state) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">this</span>.state = state;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">  &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> context = <span class="keyword">new</span> Context();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">28</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> greed = <span class="keyword">new</span> State(<span class="string">'greed'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">29</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> yellow = <span class="keyword">new</span> State(<span class="string">'yellow'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">30</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> red = <span class="keyword">new</span> State(<span class="string">'red'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">31</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">32</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 绿灯亮了</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">33</span></pre></td><td class="code"><pre><span class="line">greed.handle(context);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">34</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(context.getState())</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">35</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">36</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 黄灯亮了</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">37</span></pre></td><td class="code"><pre><span class="line">yellow.handle(context);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">38</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(context.getState())</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">39</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">40</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 红灯亮了</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">41</span></pre></td><td class="code"><pre><span class="line">red.handle(context);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">42</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(context.getState())</span></pre></td></tr></table></figure>
+
+<h3 id="应用场景-7"><a href="#应用场景-7" class="headerlink" title="应用场景"></a>应用场景</h3><ul>
+<li>有限状态机（Promise 就是一个有限状态机）</li>
+</ul>
+<h3 id="设计原则验证-7"><a href="#设计原则验证-7" class="headerlink" title="设计原则验证"></a>设计原则验证</h3><ul>
+<li>将状态对象和主题对象分离，状态的变化逻辑单独处理</li>
+<li>符合开放封闭原则</li>
+</ul>
+<h2 id="其他设计模式"><a href="#其他设计模式" class="headerlink" title="其他设计模式"></a>其他设计模式</h2><p><a href="http://c.biancheng.net/view/1317.html" target="_blank" rel="noopener">软件设计模式概述</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div></div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechart.png" alt="破晓 L 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" rel="tag"># 设计模式</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/12/25/%E7%BB%A7%E6%89%BF/" rel="next" title="继承">
+                <i class="fa fa-chevron-left"></i> 继承
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/01/17/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="prev" title="数据结构基础详解">
+                数据结构基础详解 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpg"
+                alt="破晓 L" />
+            
+              <p class="site-author-name" itemprop="name">破晓 L</p>
+              <p class="site-description motion-element" itemprop="description">桃李不言 下自成蹊</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="http://your-feed-url" target="_blank" rel="alternate noopener">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/xingleizhao/Front-end-interview-API" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i></a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:zxljoly@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope-square"></i></a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#设计模式"><span class="nav-number">1.</span> <span class="nav-text">设计模式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#单例模式"><span class="nav-number">1.1.</span> <span class="nav-text">单例模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#代码演示"><span class="nav-number">1.1.1.</span> <span class="nav-text">代码演示</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#应用场景"><span class="nav-number">1.1.2.</span> <span class="nav-text">应用场景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设计原则验证"><span class="nav-number">1.1.3.</span> <span class="nav-text">设计原则验证</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#工厂模式"><span class="nav-number">1.2.</span> <span class="nav-text">工厂模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#代码演示-1"><span class="nav-number">1.2.1.</span> <span class="nav-text">代码演示</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#应用场景-1"><span class="nav-number">1.2.2.</span> <span class="nav-text">应用场景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设计原则验证-1"><span class="nav-number">1.2.3.</span> <span class="nav-text">设计原则验证</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#适配器模式"><span class="nav-number">1.3.</span> <span class="nav-text">适配器模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#代码演示-2"><span class="nav-number">1.3.1.</span> <span class="nav-text">代码演示</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#应用场景-2"><span class="nav-number">1.3.2.</span> <span class="nav-text">应用场景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设计原则验证-2"><span class="nav-number">1.3.3.</span> <span class="nav-text">设计原则验证</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#装饰器模式"><span class="nav-number">1.4.</span> <span class="nav-text">装饰器模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#代码演示-3"><span class="nav-number">1.4.1.</span> <span class="nav-text">代码演示</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#应用场景-3"><span class="nav-number">1.4.2.</span> <span class="nav-text">应用场景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设计原则验证-3"><span class="nav-number">1.4.3.</span> <span class="nav-text">设计原则验证</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代理模式"><span class="nav-number">1.5.</span> <span class="nav-text">代理模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#代码演示-4"><span class="nav-number">1.5.1.</span> <span class="nav-text">代码演示</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#应用场景-4"><span class="nav-number">1.5.2.</span> <span class="nav-text">应用场景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设计原则验证-4"><span class="nav-number">1.5.3.</span> <span class="nav-text">设计原则验证</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#外观模式"><span class="nav-number">1.6.</span> <span class="nav-text">外观模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#观察者模式"><span class="nav-number">1.7.</span> <span class="nav-text">观察者模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#代码实现"><span class="nav-number">1.7.1.</span> <span class="nav-text">代码实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#应用场景-5"><span class="nav-number">1.7.2.</span> <span class="nav-text">应用场景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设计原则验证-5"><span class="nav-number">1.7.3.</span> <span class="nav-text">设计原则验证</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#迭代器模式"><span class="nav-number">1.8.</span> <span class="nav-text">迭代器模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#代码演示-5"><span class="nav-number">1.8.1.</span> <span class="nav-text">代码演示</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#应用场景-6"><span class="nav-number">1.8.2.</span> <span class="nav-text">应用场景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设计原则验证-6"><span class="nav-number">1.8.3.</span> <span class="nav-text">设计原则验证</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#状态模式"><span class="nav-number">1.9.</span> <span class="nav-text">状态模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#代码实现-1"><span class="nav-number">1.9.1.</span> <span class="nav-text">代码实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#应用场景-7"><span class="nav-number">1.9.2.</span> <span class="nav-text">应用场景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设计原则验证-7"><span class="nav-number">1.9.3.</span> <span class="nav-text">设计原则验证</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其他设计模式"><span class="nav-number">1.10.</span> <span class="nav-text">其他设计模式</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">破晓 L</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
