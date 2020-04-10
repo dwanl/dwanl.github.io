@@ -1,0 +1,922 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Vue,组件设计," />
+
+
+
+
+
+  <link rel="alternate" href="http://your-feed-url" title="塞纳河左岸" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="本文涉及技术点：  动态组件 &amp;amp; 异步组件 内置组件 keep-alive &amp;amp; transition 插槽 slot 及 v-slot  实际场景多级 tabs 切换，tab 项不固定，灵活控制 tab 项内容的展示，如下图。   目录结构目录结构大概像这样：  src components - 公共组件 Tabs.vue - 封装的 Tabs 组件 EmptyView.vue -">
+<meta name="keywords" content="Vue,组件设计">
+<meta property="og:type" content="article">
+<meta property="og:title" content="记一次 Vue 组件设计以及使用 computed 动态引入组件">
+<meta property="og:url" content="http:&#x2F;&#x2F;www.webinfoq.cn&#x2F;2020&#x2F;04&#x2F;10&#x2F;tabs%20%E7%BB%84%E4%BB%B6%E8%AE%BE%E8%AE%A1&#x2F;index.html">
+<meta property="og:site_name" content="塞纳河左岸">
+<meta property="og:description" content="本文涉及技术点：  动态组件 &amp;amp; 异步组件 内置组件 keep-alive &amp;amp; transition 插槽 slot 及 v-slot  实际场景多级 tabs 切换，tab 项不固定，灵活控制 tab 项内容的展示，如下图。   目录结构目录结构大概像这样：  src components - 公共组件 Tabs.vue - 封装的 Tabs 组件 EmptyView.vue -">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https:&#x2F;&#x2F;mmbiz.qpic.cn&#x2F;mmbiz_png&#x2F;qtCIoP3pd2RN0ibPRD8Myr6NzxcKQOgGub579PZKiciaZ7icYItsuaWCPAwu639oPWabty677PyVU1VQoULkJGedmw&#x2F;0?wx_fmt&#x3D;png">
+<meta property="og:image" content="https:&#x2F;&#x2F;imgkr.cn-bj.ufileos.com&#x2F;850870a5-fe6c-4207-b644-ed525e0e082b.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;imgkr.cn-bj.ufileos.com&#x2F;271d93ed-4b66-4161-8f93-ddffef14f884.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;imgkr.cn-bj.ufileos.com&#x2F;8622f8c3-c346-4de2-a484-be38c8d6080b.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;imgkr.cn-bj.ufileos.com&#x2F;e4cda413-73f6-46c0-9d6b-a13511a996d4.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;imgkr.cn-bj.ufileos.com&#x2F;4e41f2f2-fe18-41f6-adde-0a0d9caefdb2.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;imgkr.cn-bj.ufileos.com&#x2F;92aa0fc0-886c-441c-bef2-4f9e0afcad52.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;imgkr.cn-bj.ufileos.com&#x2F;52d555b5-2d2a-4a6c-a1cf-53010cb2b527.png">
+<meta property="og:updated_time" content="2020-04-10T05:49:14.757Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;mmbiz.qpic.cn&#x2F;mmbiz_png&#x2F;qtCIoP3pd2RN0ibPRD8Myr6NzxcKQOgGub579PZKiciaZ7icYItsuaWCPAwu639oPWabty677PyVU1VQoULkJGedmw&#x2F;0?wx_fmt&#x3D;png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":10,"b2t":true,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.webinfoq.cn/2020/04/10/tabs 组件设计/"/>
+
+
+
+
+
+  <title>记一次 Vue 组件设计以及使用 computed 动态引入组件 | 塞纳河左岸</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">塞纳河左岸</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Rive gauche</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-university"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.webinfoq.cn/2020/04/10/tabs%20%E7%BB%84%E4%BB%B6%E8%AE%BE%E8%AE%A1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="破晓 L">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="塞纳河左岸">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">记一次 Vue 组件设计以及使用 computed 动态引入组件</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-04-10T13:41:09+08:00">
+                2020-04-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index">
+                    <span itemprop="name">JavaScript</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>本文涉及技术点：</p>
+<ul>
+<li>动态组件 &amp; 异步组件</li>
+<li>内置组件 keep-alive &amp; transition</li>
+<li>插槽 slot 及 v-slot</li>
+</ul>
+<h1 id="实际场景"><a href="#实际场景" class="headerlink" title="实际场景"></a>实际场景</h1><p>多级 <code>tabs</code> 切换，<code>tab</code> 项不固定，灵活控制 <code>tab</code> 项内容的展示，如下图。 </p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/qtCIoP3pd2RN0ibPRD8Myr6NzxcKQOgGub579PZKiciaZ7icYItsuaWCPAwu639oPWabty677PyVU1VQoULkJGedmw/0?wx_fmt=png" alt="image.png"></p>
+<h1 id="目录结构"><a href="#目录结构" class="headerlink" title="目录结构"></a>目录结构</h1><p>目录结构大概像这样：</p>
+<ul>
+<li>src<ul>
+<li>components - 公共组件<ul>
+<li>Tabs.vue - 封装的 <code>Tabs</code> 组件</li>
+<li>EmptyView.vue - 空页面组件</li>
+<li>*.vue  - 其他公共组件</li>
+</ul>
+</li>
+<li>pages - 容器组件<ul>
+<li>Index.vue - 主要处理一级 tabs 数据及对应的内容渲染</li>
+<li>VersionList.vue 主要处理二级 tabs 数据及对应的内容渲染</li>
+</ul>
+</li>
+<li>views - 视图组件，不固定需要动态引入，可以无限扩展<ul>
+<li>project-exercise<ul>
+<li>Index.vue</li>
+</ul>
+</li>
+<li>…</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://imgkr.cn-bj.ufileos.com/850870a5-fe6c-4207-b644-ed525e0e082b.png" alt=""></p>
+<h1 id="组件设计"><a href="#组件设计" class="headerlink" title="组件设计"></a>组件设计</h1><p>从页面元素的可复用性角度考虑，我们将将组件按类型分为公众组件、容器组件和视图组件。</p>
+<h2 id="公共组件"><a href="#公共组件" class="headerlink" title="公共组件"></a>公共组件</h2><p>根据对页面元素的分析，我们可以提取<em>选项卡元素</em>为公共组件，因为两个地方用到了选项卡切换，所以根据需求进行封装，代码如下。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--src/components/Tags.vue --&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  <span class="tag">&lt;<span class="name">el-tabs</span> <span class="attr">v-model</span>=<span class="string">"active"</span> <span class="attr">:type</span>=<span class="string">"type"</span> @<span class="attr">tab-click</span>=<span class="string">"handleClick"</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    <span class="tag">&lt;<span class="name">el-tab-pane</span> <span class="attr">v-for</span>=<span class="string">"item in tabs"</span> <span class="attr">:key</span>=<span class="string">"item.id"</span> <span class="attr">:name</span>=<span class="string">"item.name"</span> <span class="attr">:label</span>=<span class="string">"item.label"</span>&gt;</span><span class="tag">&lt;/<span class="name">el-tab-pane</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    <span class="tag">&lt;<span class="name">transition</span> <span class="attr">name</span>=<span class="string">"component-fade"</span> <span class="attr">mode</span>=<span class="string">"out-in"</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">      <span class="tag">&lt;<span class="name">keep-alive</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">        <span class="tag">&lt;<span class="name">slot</span> <span class="attr">:item</span>=<span class="string">"currentTab"</span>&gt;</span><span class="tag">&lt;/<span class="name">slot</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">      <span class="tag">&lt;/<span class="name">keep-alive</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">    <span class="tag">&lt;/<span class="name">transition</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">  <span class="tag">&lt;/<span class="name">el-tabs</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span></pre></td></tr></table></figure>
+<blockquote>
+<p>我们封装的组件 <code>Tags</code> 中，使用 <code>elementUI</code>中的 <code>tabs</code> 组件（类库可以随意选择，不要受工具限制）。</p>
+</blockquote>
+<p>公共组件 <code>Tags</code> 由两部分构成：</p>
+<ul>
+<li><strong><code>tabs</code> 切换栏</strong> - 切换栏数据由外部控制，通过 <code>props</code> 注入。</li>
+<li><strong>内容展示区域</strong> - 内容展示区域由 <code>slot</code> 进行控制。</li>
+</ul>
+<p>之所以 <code>slot</code> 外层包裹 <code>keep-alive</code> 是因为实际分发的组件内容是由动态组件控制的，起到缓存优化的作用。</p>
+<h2 id="一级容器组件-Index"><a href="#一级容器组件-Index" class="headerlink" title="一级容器组件 Index"></a>一级容器组件 Index</h2><blockquote>
+<p>容器组件分为： 一级选项卡容器和二级选项卡容器，一级选项卡内容展示区域又负责渲染二级选项卡及选项卡对应的内容区域。</p>
+</blockquote>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">--!</span> <span class="attr">src</span>/<span class="attr">pages</span>/<span class="attr">Index.vue--</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  <span class="tag">&lt;<span class="name">div</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    <span class="tag">&lt;<span class="name">v-tags</span> <span class="attr">:activeName</span>=<span class="string">"activeName"</span> <span class="attr">:type</span>=<span class="string">"tabType"</span> <span class="attr">:tabs</span>=<span class="string">"tabs"</span> <span class="attr">v-slot</span>=<span class="string">"current"</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">      <span class="tag">&lt;<span class="name">component</span> <span class="attr">:is</span>=<span class="string">"getCurrentTab(current.item)"</span> <span class="attr">:tab</span>=<span class="string">"getCurrentTab(current.item)"</span>&gt;</span><span class="tag">&lt;/<span class="name">component</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    <span class="tag">&lt;/<span class="name">v-tags</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line"><span class="javascript">  <span class="keyword">import</span> VTags <span class="keyword">from</span> <span class="string">'@/components/Tabs'</span>;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line"><span class="javascript">  <span class="keyword">import</span> EmptyView <span class="keyword">from</span> <span class="string">'@/components/EmptyView'</span>;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line"><span class="javascript">  <span class="keyword">import</span> VersionList <span class="keyword">from</span> <span class="string">'./VersionList'</span>;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line"><span class="javascript">  <span class="keyword">export</span> <span class="keyword">default</span> &#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">    components: &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">      VTags,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">      EmptyView,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">      ProjectExercise: VersionList,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">      FullCycle: VersionList</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">    &#125;,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">    data() &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line"><span class="actionscript">      <span class="keyword">return</span> &#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line"><span class="actionscript">        tabType: <span class="string">'card'</span>,</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line"><span class="actionscript">        activeName: <span class="string">'project-exercise'</span>,</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">        tabs: [...]     </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line">      &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line">    &#125;,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line">    methods: &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">28</span></pre></td><td class="code"><pre><span class="line"><span class="actionscript">      <span class="comment">// 根据 tabName 渲染不同组件</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">29</span></pre></td><td class="code"><pre><span class="line">      getCurrentTab(name) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">30</span></pre></td><td class="code"><pre><span class="line"><span class="actionscript">        <span class="keyword">const</span> tabName = [</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">31</span></pre></td><td class="code"><pre><span class="line"><span class="actionscript">          <span class="string">'project-exercise'</span>, </span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">32</span></pre></td><td class="code"><pre><span class="line"><span class="actionscript">          <span class="string">'full-cycle'</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">33</span></pre></td><td class="code"><pre><span class="line">        ]</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">34</span></pre></td><td class="code"><pre><span class="line"><span class="actionscript">        <span class="keyword">return</span> tabName.includes(name) ? name : <span class="string">'empty-view'</span>;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">35</span></pre></td><td class="code"><pre><span class="line">      &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">36</span></pre></td><td class="code"><pre><span class="line">    &#125;, </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">37</span></pre></td><td class="code"><pre><span class="line">  &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">38</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></pre></td></tr></table></figure>
+
+<p>一级容器组件做的事情：</p>
+<ul>
+<li>负责告诉公共组件 <code>Tabs</code> 渲染哪些 <code>tabs</code> 数据。</li>
+<li>负责控制一级选项卡进行切换时，渲染对应的内容组件。</li>
+</ul>
+<p>因此通过 <code>props</code> 传入给 <code>Tabs</code> 用来渲染的 <code>tabs</code> 数据可能像这样：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">tabs: [</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  &#123; <span class="attr">id</span>: <span class="string">'0'</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    label: <span class="string">'项目策划'</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    name: <span class="string">'project-exercise'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">  &#125;,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">  &#123; <span class="attr">id</span>: <span class="string">'1'</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">    label: <span class="string">'需求分析'</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">    name: <span class="string">'demand-analysis'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">  &#125;,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">  &#123; <span class="attr">id</span>: <span class="string">'2'</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">    label: <span class="string">'设计编码'</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">    name: <span class="string">'design-encoding'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">  &#125;,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">  &#123; <span class="attr">id</span>: <span class="string">'3'</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">    label: <span class="string">'单元测试'</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">    name: <span class="string">'unit-test'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">  &#125;,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">  &#123; <span class="attr">id</span>: <span class="string">'4'</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">    label: <span class="string">'组装测试'</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">    name: <span class="string">'assembly-test'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">  &#125;,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">  &#123; <span class="attr">id</span>: <span class="string">'5'</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">    label: <span class="string">'确认测试'</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">    name: <span class="string">'confirmation-test'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line">  &#125;,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line">  &#123; <span class="attr">id</span>: <span class="string">'6'</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line">    label: <span class="string">'全生命周期'</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">28</span></pre></td><td class="code"><pre><span class="line">    name: <span class="string">'full-cycle'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">29</span></pre></td><td class="code"><pre><span class="line">  &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">30</span></pre></td><td class="code"><pre><span class="line">]</span></pre></td></tr></table></figure>
+<p>一级选项卡渲染出来的结果像下图所示。</p>
+<p><img src="https://imgkr.cn-bj.ufileos.com/271d93ed-4b66-4161-8f93-ddffef14f884.png" alt=""></p>
+<p>分发给 <code>Tabs</code> 组件的 <code>slot</code> 插槽的内容通过动态组件 <code>component</code> 控制。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">component</span> <span class="attr">:is</span>=<span class="string">"getCurrentTab(current.item)"</span> <span class="attr">:tab</span>=<span class="string">"getCurrentTab(current.item)"</span>&gt;</span><span class="tag">&lt;/<span class="name">component</span>&gt;</span></span></pre></td></tr></table></figure>
+<p><code>is</code> 属性的值由公共组件 <code>Tabs</code> 传入，传入的值与 <code>name</code> 值对应，由 <code>v-slot</code> 接受。最后对处理传入的值进行匹配操作，如下代码。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">methods: &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="comment">// 根据 tabName 渲染不同组件</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  getCurrentTab(name) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">const</span> tabName = [</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">      <span class="string">'project-exercise'</span>, </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">      <span class="string">'full-cycle'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">    ]</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">return</span> tabName.includes(name) ? name : <span class="string">'empty-view'</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">  &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">&#125;,</span></pre></td></tr></table></figure>
+<p>根据需求我们只渲染 <code>project-exercise</code>、<code>full-cycle</code> 两个选项中的内容，其他选项我们展示一个 <code>EmptyView</code> 组件，效果如下。</p>
+<p><img src="https://imgkr.cn-bj.ufileos.com/8622f8c3-c346-4de2-a484-be38c8d6080b.png" alt=""></p>
+<h2 id="二级容器组件-VersionList"><a href="#二级容器组件-VersionList" class="headerlink" title="二级容器组件 VersionList"></a>二级容器组件 VersionList</h2><p><strong>二级容器组件是一级容器组件和视图组件的 <code>中间桥梁</code></strong>，也就是说一级容器选项卡进行切换时都会渲染二级容器组件，二级容器组件主要负责渲染版本列表和版本对应的视图组件。</p>
+<blockquote>
+<p>版本号作为二级选项卡存在，每一个一级选项卡的内容展示都会显示相同的版本列表。</p>
+</blockquote>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="tag">&lt;<span class="name">div</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="tag">&lt;<span class="name">v-tags</span> <span class="attr">:type</span>=<span class="string">"tabType"</span> <span class="attr">:tabs</span>=<span class="string">"tabs"</span> <span class="attr">v-slot</span>=<span class="string">"current"</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">      <span class="tag">&lt;<span class="name">component</span> <span class="attr">:is</span>=<span class="string">"renderView"</span> <span class="attr">v-if</span>=<span class="string">"renderView"</span> <span class="attr">:planId</span>=<span class="string">"getPlanId(current.item)"</span>&gt;</span><span class="tag">&lt;/<span class="name">component</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">      <span class="comment">&lt;!-- &lt;own-view :planId="getPlanId(current.item)"&gt;&lt;/own-view&gt; --&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    <span class="tag">&lt;/<span class="name">v-tags</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line"><span class="actionscript">  <span class="comment">//import OwnView from "../views/project-exercise/";</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></pre></td></tr></table></figure>
+<p><code>VersionList</code> 中 <code>template</code> 类似一级容器组件，也是引入公共组件 <code>Tags</code>，并通过 <code>props</code> 向其传递 <code>tabs</code> ，告诉公共组件选显示什么样的项卡数据。</p>
+<p><img src="https://imgkr.cn-bj.ufileos.com/e4cda413-73f6-46c0-9d6b-a13511a996d4.png" alt=""></p>
+<p>接下来，二级选项卡对应的视图组件，也是由动态组件 <code>component</code> 控制（分发传给 <code>Tags</code> 组件中 <code>slot</code> 插槽的内容）。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">component</span> <span class="attr">:is</span>=<span class="string">"renderViewName"</span> <span class="attr">v-if</span>=<span class="string">"renderViewName"</span> <span class="attr">:planId</span>=<span class="string">"getPlanId(current.item)"</span>&gt;</span><span class="tag">&lt;/<span class="name">component</span>&gt;</span></span></pre></td></tr></table></figure>
+
+<h3 id="computed-动态引入异步组件"><a href="#computed-动态引入异步组件" class="headerlink" title="computed 动态引入异步组件"></a>computed 动态引入异步组件</h3><p><strong>与一级容器组件不同的是，传入给 <code>is</code> 属性的值不是组件名，而是组件实例</strong>，这里渲染的视图组件不是通过固定路径引入，而是通过 <code>import</code> 动态引入的，<strong>这里也是本文的重点 <code>computed</code> 动态引入组件，</strong> 具体实现代码如下。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  ...</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="javascript"><span class="keyword">import</span> VTags <span class="keyword">from</span> <span class="string">"@/components/Tabs"</span>;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="javascript"><span class="keyword">import</span> &#123; getProjectPlans &#125; <span class="keyword">from</span> <span class="string">"@/api"</span>;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="javascript"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"><span class="actionscript">  props: [<span class="string">"tab"</span>],</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">  components: &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">    VTags</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">  &#125;,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">  data() &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line"><span class="actionscript">    <span class="keyword">return</span> &#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line"><span class="actionscript">      tabType: <span class="string">"border-card"</span>,</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">      tabs: [],</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line"><span class="actionscript">      renderView: <span class="literal">null</span>, </span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line"><span class="actionscript">      view: <span class="keyword">this</span>.tab <span class="comment">//tab 名</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">    &#125;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">  &#125;,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">  watch: &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">    tab() &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line"><span class="actionscript">      <span class="keyword">this</span>.view = <span class="keyword">this</span>.tab;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line"><span class="actionscript">      <span class="keyword">this</span>.init()</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line">  &#125;,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line">  computed: &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line"><span class="actionscript">    <span class="comment">// 通过计算属性动态引入组件</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">28</span></pre></td><td class="code"><pre><span class="line">    loaderWiew() &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">29</span></pre></td><td class="code"><pre><span class="line"><span class="javascript">      <span class="keyword">return</span> <span class="function"><span class="params">()</span> =&gt;</span> <span class="keyword">import</span>(<span class="string">"../views/"</span> + <span class="keyword">this</span>.view + <span class="string">"/Index.vue"</span>);</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">30</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">31</span></pre></td><td class="code"><pre><span class="line">  &#125;,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">32</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">33</span></pre></td><td class="code"><pre><span class="line">  methods: &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">34</span></pre></td><td class="code"><pre><span class="line"><span class="actionscript">    <span class="comment">// 根据 name 获得 planId</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">35</span></pre></td><td class="code"><pre><span class="line">    getPlanId(name) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">36</span></pre></td><td class="code"><pre><span class="line"><span class="javascript">      <span class="keyword">let</span> filterTabs = <span class="keyword">this</span>.tabs.filter(<span class="function"><span class="params">item</span> =&gt;</span> item.name == name);</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">37</span></pre></td><td class="code"><pre><span class="line">      if (filterTabs.length) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">38</span></pre></td><td class="code"><pre><span class="line"><span class="actionscript">        <span class="keyword">return</span> filterTabs[<span class="number">0</span>].id;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">39</span></pre></td><td class="code"><pre><span class="line">      &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">40</span></pre></td><td class="code"><pre><span class="line">    &#125;,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">41</span></pre></td><td class="code"><pre><span class="line">    init() &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">42</span></pre></td><td class="code"><pre><span class="line"><span class="javascript">      <span class="keyword">this</span>.loaderWiew().then(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">43</span></pre></td><td class="code"><pre><span class="line"><span class="actionscript">        <span class="comment">// 动态加载组件</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">44</span></pre></td><td class="code"><pre><span class="line"><span class="actionscript">        <span class="comment">// this.loaderWiew() 为组件实例</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">45</span></pre></td><td class="code"><pre><span class="line"><span class="javascript">        <span class="keyword">this</span>.renderView = <span class="function"><span class="params">()</span> =&gt;</span> <span class="keyword">this</span>.loaderWiew();</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">46</span></pre></td><td class="code"><pre><span class="line"><span class="javascript">      &#125;).catch(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">47</span></pre></td><td class="code"><pre><span class="line"><span class="actionscript">        <span class="comment">// 组件不存在时处理</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">48</span></pre></td><td class="code"><pre><span class="line"><span class="javascript">        <span class="keyword">this</span>.renderView = <span class="function"><span class="params">()</span> =&gt;</span> <span class="keyword">import</span>(<span class="string">"@/components/EmptyView.vue"</span>);</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">49</span></pre></td><td class="code"><pre><span class="line">      &#125;);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">50</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">51</span></pre></td><td class="code"><pre><span class="line">  &#125;,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">52</span></pre></td><td class="code"><pre><span class="line">  mounted() &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">53</span></pre></td><td class="code"><pre><span class="line"><span class="actionscript">    <span class="keyword">this</span>.init();  </span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">54</span></pre></td><td class="code"><pre><span class="line"><span class="actionscript">    <span class="comment">// 省略通过接口获取版本列表数据的逻辑</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">55</span></pre></td><td class="code"><pre><span class="line">  &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">56</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">57</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></pre></td></tr></table></figure>
+
+<p>为什么使用 <code>computed</code> 去动态引入组件，而不是像这样：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  ...</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="javascript"><span class="keyword">import</span> VTags <span class="keyword">from</span> <span class="string">"@/components/Tabs"</span>;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="javascript"><span class="keyword">const</span> OwnView = <span class="keyword">import</span>(<span class="string">"../views/"</span> + <span class="keyword">this</span>.view + <span class="string">"/Index.vue"</span>);</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="javascript"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">  components: &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">    VTags,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">    OwnView</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">  &#125;,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></pre></td></tr></table></figure>
+
+<p>要知道，在 <code>export defaul {}</code> 外部是无法获取 <code>vue</code> 实例的，因此就无法与外部进行通信，获取不到外部传入的 <code>this.view</code> 变量。</p>
+<p>因此我们只能通过引入<a href="https://cn.vuejs.org/v2/guide/components-dynamic-async.html#ad" target="_blank" rel="noopener">异步组件</a>的概念，来动态引入组件。</p>
+<p><strong>首先我们在计算属性中创建异步组件的实例，返回 <code>Promise</code>。</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">computed: &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="comment">// 返回 Promise</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  loaderWiew() &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">return</span> <span class="function"><span class="params">()</span> =&gt;</span> <span class="keyword">import</span>(<span class="string">"../views/"</span> + <span class="keyword">this</span>.view + <span class="string">"/Index.vue"</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">  &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">&#125;,</span></pre></td></tr></table></figure>
+
+
+<p>在组件挂载 <code>mouted</code> 阶段，处理 <code>fulfilled</code> 和 <code>rejected</code> 两种状态，<code>fulfilled</code> 正常渲染，<code>rejected</code> 则渲染 <code>EmptyView</code> 组件。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">init() &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">this</span>.loaderWiew().then(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">// 动态加载组件</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">// this.loaderWiew() 为组件实例</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">this</span>.renderViewName = <span class="function"><span class="params">()</span> =&gt;</span> <span class="keyword">this</span>.loaderWiew();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">  &#125;).catch(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">// 组件不存在时处理</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">this</span>.renderViewName = <span class="function"><span class="params">()</span> =&gt;</span> <span class="keyword">import</span>(<span class="string">"@/components/EmptyView.vue"</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">  &#125;);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">...</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">mounted() &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">this</span>.init();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+<p><code>this.view</code> 的值与 <code>views</code> 目录下的子目录匹配，匹配成功，代表成功引入。（后续开发中，视图组件可以无限扩展）</p>
+<p><img src="https://imgkr.cn-bj.ufileos.com/4e41f2f2-fe18-41f6-adde-0a0d9caefdb2.png" alt=""></p>
+<p><strong>接着，通过 <code>watch</code> 监听数据变化，重新初始化组件。</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">watch: &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  tab() &#123; <span class="comment">// tab 通过 props 传入，传入的值与目录名称对应</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">this</span>.view = <span class="keyword">this</span>.tab; <span class="comment">// </span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">this</span>.init(); <span class="comment">// 由变化时，说明二级 tab 进行了切换，重新渲染</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">  &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">&#125;,</span></pre></td></tr></table></figure>
+<p>最后，视图组件引入成功，正常渲染。</p>
+<p><img src="https://imgkr.cn-bj.ufileos.com/92aa0fc0-886c-441c-bef2-4f9e0afcad52.png" alt=""></p>
+<p>引入失败，渲染 <code>EmptyView</code> 组件。</p>
+<p><img src="https://imgkr.cn-bj.ufileos.com/52d555b5-2d2a-4a6c-a1cf-53010cb2b527.png" alt=""></p>
+<h1 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h1><p>一个完整的多级 <code>tabs</code> 切换组件就设计完成了，支持无限 <code>view</code> 层组件扩展，可以根据需求灵活控制 <code>tab</code> 项内容的展示。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">getCurrentTab(name) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">const</span> tabName = [</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">      <span class="string">'project-exercise'</span>, </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">      <span class="string">'full-cycle'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    ]</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">return</span> tabName.includes(name) ? name : <span class="string">'empty-view'</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div></div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechart.png" alt="破晓 L 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Vue/" rel="tag"># Vue</a>
+          
+            <a href="/tags/%E7%BB%84%E4%BB%B6%E8%AE%BE%E8%AE%A1/" rel="tag"># 组件设计</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/03/24/%E5%B8%B8%E7%94%A8%20GIt%20%E6%8C%87%E4%BB%A4/" rel="next" title="常用 Git 命令合集">
+                <i class="fa fa-chevron-left"></i> 常用 Git 命令合集
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpg"
+                alt="破晓 L" />
+            
+              <p class="site-author-name" itemprop="name">破晓 L</p>
+              <p class="site-description motion-element" itemprop="description">桃李不言 下自成蹊</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="http://your-feed-url" target="_blank" rel="alternate noopener">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/xingleizhao/Front-end-interview-API" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i></a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:zxljoly@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope-square"></i></a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#实际场景"><span class="nav-number">1.</span> <span class="nav-text">实际场景</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#目录结构"><span class="nav-number">2.</span> <span class="nav-text">目录结构</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#组件设计"><span class="nav-number">3.</span> <span class="nav-text">组件设计</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#公共组件"><span class="nav-number">3.1.</span> <span class="nav-text">公共组件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一级容器组件-Index"><span class="nav-number">3.2.</span> <span class="nav-text">一级容器组件 Index</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二级容器组件-VersionList"><span class="nav-number">3.3.</span> <span class="nav-text">二级容器组件 VersionList</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#computed-动态引入异步组件"><span class="nav-number">3.3.1.</span> <span class="nav-text">computed 动态引入异步组件</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#最后"><span class="nav-number">4.</span> <span class="nav-text">最后</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">破晓 L</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
