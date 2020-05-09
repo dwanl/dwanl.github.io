@@ -278,6 +278,157 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.webinfoq.cn/2019/12/25/webpack%E4%B8%ADhash/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="破晓 L">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="塞纳河左岸">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/12/25/webpack%E4%B8%ADhash/" itemprop="url">webpack 中 hash、chunkhash、contenthash 的区别</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-12-25T16:08:53+08:00">
+                2019-12-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%B7%A5%E7%A8%8B/" itemprop="url" rel="index">
+                    <span itemprop="name">工程</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          
+hash 一般是结合 CDN 缓存来使用，通过 webpack 构建之后，生成对应文件名自动带上对应的 MD5 值。如果文件内容发生改变的话，那么对应文件 hash 值也会改变，对应的 HTML 引用的 URL 地址也会改变，触发 CDN 服务器从原服务器上拉取对应数据，进而更新本地缓存。但是实际使用时，这三种 hash 计算还是有一定区别。
+
+webpack 中对于输出文件名可以有三种 has
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/12/25/webpack%E4%B8%ADhash/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://www.webinfoq.cn/2019/12/25/vue%E4%B8%AD%E7%9A%84%E4%BF%AE%E9%A5%B0%E7%AC%A6/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1378,7 +1529,7 @@ promise.then(onFulfilled, onRejected) 中的 onRejected 不能捕获当前 onFul
               
                 <a href="/archives%7C%7C%20archive">
               
-                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-count">18</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1485,6 +1636,27 @@ promise.then(onFulfilled, onRejected) 中的 onRejected 不能捕获当前 onFul
 
 
         
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
 
 
 

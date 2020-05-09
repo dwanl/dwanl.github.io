@@ -1,0 +1,982 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="框架," />
+
+
+
+
+
+  <link rel="alternate" href="http://your-feed-url" title="塞纳河左岸" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="前言 Vue Router 是 Vue.js 官方的路由管理器。它和 Vue.js 的核心深度集成，让构建单页面应用变得易如反掌。  本文基于的源码版本是 vue-next-router alpha.10，为了与 Vue 2.0 中的 Vue Router 区分，下文将 vue-router v3.1.6 称为 vue2-router。 本文旨在帮助更多人对新版本 Router 有一个初步的了解，">
+<meta name="keywords" content="框架">
+<meta property="og:type" content="article">
+<meta property="og:title" content="vue-next-router 给我们带来了什么？">
+<meta property="og:url" content="http:&#x2F;&#x2F;www.webinfoq.cn&#x2F;2020&#x2F;05&#x2F;09&#x2F;vue-next-router&#x2F;index.html">
+<meta property="og:site_name" content="塞纳河左岸">
+<meta property="og:description" content="前言 Vue Router 是 Vue.js 官方的路由管理器。它和 Vue.js 的核心深度集成，让构建单页面应用变得易如反掌。  本文基于的源码版本是 vue-next-router alpha.10，为了与 Vue 2.0 中的 Vue Router 区分，下文将 vue-router v3.1.6 称为 vue2-router。 本文旨在帮助更多人对新版本 Router 有一个初步的了解，">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https:&#x2F;&#x2F;imgkr.cn-bj.ufileos.com&#x2F;00fd2718-bc65-4e99-84d2-32673adfe5ce.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;imgkr.cn-bj.ufileos.com&#x2F;e9b5295d-abbf-4a15-8e77-7bdb6e0512b9.png">
+<meta property="og:updated_time" content="2020-05-09T03:31:11.065Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;imgkr.cn-bj.ufileos.com&#x2F;00fd2718-bc65-4e99-84d2-32673adfe5ce.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":10,"b2t":true,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.webinfoq.cn/2020/05/09/vue-next-router/"/>
+
+
+
+
+
+  <title>vue-next-router 给我们带来了什么？ | 塞纳河左岸</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">塞纳河左岸</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Rive gauche</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-university"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.webinfoq.cn/2020/05/09/vue-next-router/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="破晓 L">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="塞纳河左岸">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">vue-next-router 给我们带来了什么？</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-05-09T11:30:12+08:00">
+                2020-05-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index">
+                    <span itemprop="name">JavaScript</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-eye"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><blockquote>
+<p>Vue Router 是 Vue.js 官方的路由管理器。它和 Vue.js 的核心深度集成，让构建单页面应用变得易如反掌。</p>
+</blockquote>
+<p>本文基于的源码版本是 <a href="https://github.com/vuejs/vue-router-next" target="_blank" rel="noopener">vue-next-router alpha.10</a>，为了与 Vue 2.0 中的 Vue Router 区分，下文将 <a href="https://github.com/vuejs/vue-router" target="_blank" rel="noopener">vue-router v3.1.6</a> 称为 <code>vue2-router</code>。</p>
+<p>本文旨在帮助更多人对新版本 Router 有一个初步的了解，如果文中有误导大家的地方，欢迎留言指正。</p>
+<h1 id="重大改进"><a href="#重大改进" class="headerlink" title="重大改进"></a>重大改进</h1><p>此次 <code>Vue</code> 的重大改进随之而来带来了 Vue Router 的一系列改进，现阶段（<code>alpha.10</code>）相比 <code>vue2-router</code> 的主要变化，总结如下：</p>
+<h2 id="1-构建选项-mode"><a href="#1-构建选项-mode" class="headerlink" title="1. 构建选项 mode"></a>1. 构建选项 mode</h2><p>由原来的 <code>mode: &quot;history&quot;</code> 更改为 <code>history: createWebHistory()</code>。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// vue2-router</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> router = <span class="keyword">new</span> VueRouter(&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  mode: <span class="string">'history'</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  ...</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">&#125;)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// vue-next-router</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; createRouter, createWebHistory &#125; <span class="keyword">from</span> <span class="string">'vue-next-router'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> router = createRouter(&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">  history: createWebHistory(),</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">  ...</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">&#125;)</span></pre></td></tr></table></figure>
+
+<h2 id="2-构建选项-base"><a href="#2-构建选项-base" class="headerlink" title="2. 构建选项 base"></a>2. 构建选项 base</h2><p>传给 <code>createWebHistory()</code>（和其他模式） 的第一个参数作为 <code>base</code>。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//vue2-router</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> router = <span class="keyword">new</span> VueRouter(&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  base: __dirname,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">&#125;)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// vue-next-router</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; createRouter, createWebHistory &#125; <span class="keyword">from</span> <span class="string">'vue-next-router'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> router = createRouter(&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">  history: createWebHistory(<span class="string">'/'</span>),</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">  ...</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">&#125;)</span></pre></td></tr></table></figure>
+
+<h2 id="4-捕获所有路由-时，现在必须使用带有自定义正则表达式的参数进行定义：-catchAll-。"><a href="#4-捕获所有路由-时，现在必须使用带有自定义正则表达式的参数进行定义：-catchAll-。" class="headerlink" title="4. 捕获所有路由 ( /* ) 时，现在必须使用带有自定义正则表达式的参数进行定义：/:catchAll(.*)。"></a>4. 捕获所有路由 ( /* ) 时，现在必须使用带有自定义正则表达式的参数进行定义：/:catchAll(.*)。</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// vue2-router</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> router = <span class="keyword">new</span> VueRouter(&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  mode: <span class="string">'history'</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  routes: [</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    &#123; <span class="attr">path</span>: <span class="string">'/user/:a*'</span> &#125;,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">  ],</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">&#125;)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// vue-next-router</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> router = createRouter(&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">  history: createWebHistory(),</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">  routes: [</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">    &#123; <span class="attr">path</span>: <span class="string">'/user/:a:catchAll(.*)'</span>, <span class="attr">component</span>: component &#125;,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">  ],</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">&#125;)</span></pre></td></tr></table></figure>
+
+<p>当路由为 <code>/user/a/b</code> 时，捕获到的 <code>params</code> 为 <code>{&quot;a&quot;: &quot;a&quot;, &quot;catchAll&quot;: &quot;/b&quot;}</code>。</p>
+<h2 id="5-router-match-与-router-resolve-合并在一起为-router-resolve，但签名略有不同。"><a href="#5-router-match-与-router-resolve-合并在一起为-router-resolve，但签名略有不同。" class="headerlink" title="5. router.match 与 router.resolve 合并在一起为 router.resolve，但签名略有不同。"></a>5. <code>router.match</code> 与 <code>router.resolve</code> 合并在一起为 <code>router.resolve</code>，但签名略有不同。</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// vue2-router</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">...</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">resolve ( to: RawLocation, current?: Route, append?: boolean) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  ...</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">return</span> &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    location,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">    route,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">    href,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">    normalizedTo: location,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">    resolved: route</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">  &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// vue-next-router</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">resolve</span>(<span class="params"></span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="params">    rawLocation: Readonly&lt;RouteLocationRaw&gt;,</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="params">    currentLocation?: Readonly&lt;RouteLocationNormalizedLoaded&gt;</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="params">  </span>): <span class="title">RouteLocation</span> &amp; </span>&#123; href: string &#125; &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">  ...</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">let</span> matchedRoute = matcher.resolve(matcherLocation, currentLocation)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">  ...</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">return</span> &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">    fullPath,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">    hash,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line">    query: normalizeQuery(rawLocation.query),</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line">    ...matchedRoute,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line">    redirectedFrom: <span class="literal">undefined</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">28</span></pre></td><td class="code"><pre><span class="line">    href: routerHistory.base + fullPath,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">29</span></pre></td><td class="code"><pre><span class="line">  &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">30</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<h2 id="6-删除-router-getMatchedComponents，可以从-router-currentRoute-value-matched-中获取。"><a href="#6-删除-router-getMatchedComponents，可以从-router-currentRoute-value-matched-中获取。" class="headerlink" title="6. 删除 router.getMatchedComponents，可以从 router.currentRoute.value.matched 中获取。"></a>6. 删除 <code>router.getMatchedComponents</code>，可以从 <code>router.currentRoute.value.matched</code> 中获取。</h2><blockquote>
+<p><code>router.getMatchedComponents</code> 返回目标位置或是当前路由匹配的组件数组 (是数组的定义/构造类，不是实例)。通常在服务端渲染的数据预加载时使用。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">[&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  aliasOf: undefined</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  beforeEnter: undefined</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  children: []</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">  components: &#123;default: &#123;…&#125;, other: &#123;…&#125;&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">  instances: &#123;default: null, other: Proxy&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">  leaveGuards: []</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">  meta: &#123;&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">  name: undefined</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">  path: &quot;&#x2F;&quot;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">  props: ƒ (to)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">  updateGuards: []</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">&#125;]</span></pre></td></tr></table></figure>
+
+<h2 id="7-如果使用-lt-transition-gt-，则可能需要等待-router-准备就绪才能挂载应用程序。"><a href="#7-如果使用-lt-transition-gt-，则可能需要等待-router-准备就绪才能挂载应用程序。" class="headerlink" title="7. 如果使用 &lt;transition&gt;，则可能需要等待 router 准备就绪才能挂载应用程序。"></a>7. 如果使用 <code>&lt;transition&gt;</code>，则可能需要等待 <code>router</code> 准备就绪才能挂载应用程序。</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">app.use(router)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// Note: on Server Side, you need to manually push the initial location</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">router.isReady().then(<span class="function"><span class="params">()</span> =&gt;</span> app.mount(<span class="string">'#app'</span>))</span></pre></td></tr></table></figure>
+
+<p>一般情况下，正常挂载也是可以使用 <code>&lt;transition&gt;</code> 的，但是现在导航都是异步的，如果在路由初始化时有路由守卫，则在 <code>resolve</code> 之前会出现一个初始渲染的过渡，就像给 <code>&lt;transiton&gt;</code> 提供一个 <a href="https://cn.vuejs.org/v2/guide/transitions.html#%E5%88%9D%E5%A7%8B%E6%B8%B2%E6%9F%93%E7%9A%84%E8%BF%87%E6%B8%A1" target="_blank" rel="noopener">appear</a> 一样。</p>
+<h2 id="8-在服务端渲染-（SSR）-中，需要使用一个三目运算符手动传递合适的-mode。"><a href="#8-在服务端渲染-（SSR）-中，需要使用一个三目运算符手动传递合适的-mode。" class="headerlink" title="8. 在服务端渲染 （SSR） 中，需要使用一个三目运算符手动传递合适的 mode。"></a>8. 在服务端渲染 （SSR） 中，需要使用一个三目运算符手动传递合适的 <code>mode</code>。</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> history = isServer ? createMemoryHistory() : createWebHistory()</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> router = createRouter(&#123; routes, history &#125;)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// on server only</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">router.push(req.url) <span class="comment">// request url</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">router.isReady().then(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">  <span class="comment">// resolve the request</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">&#125;)</span></pre></td></tr></table></figure>
+
+<h2 id="9-push-或者-resolve-一个不存在的命名路由时，将会引发错误，而不是导航到根路由-quot-quot-并且不显示任何内容。"><a href="#9-push-或者-resolve-一个不存在的命名路由时，将会引发错误，而不是导航到根路由-quot-quot-并且不显示任何内容。" class="headerlink" title="9. push 或者 resolve 一个不存在的命名路由时，将会引发错误，而不是导航到根路由 &quot;/&quot; 并且不显示任何内容。"></a>9. <code>push</code> 或者 <code>resolve</code> 一个不存在的命名路由时，将会引发错误，而不是导航到根路由 <code>&quot;/&quot;</code> 并且不显示任何内容。</h2><p>在 <code>vue2-router</code> 中，当 <code>push</code> 一个不存在的命名路由时，路由会导航到根路由 <code>&quot;/&quot;</code> 下，并且不会渲染任何内容。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> router = <span class="keyword">new</span> VueRouter(&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  mode: <span class="string">'history'</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  routes: [&#123; <span class="attr">path</span>: <span class="string">'/'</span>, <span class="attr">name</span>: <span class="string">'foo'</span>, <span class="attr">component</span>: Foo &#125;]</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">this</span>.$router.push(&#123;<span class="attr">name</span>: <span class="string">'baz'</span>&#125;)</span></pre></td></tr></table></figure>
+
+<p>浏览器控制台只会提示如下警告，并且 <code>url</code> 会跳转到根路由 <code>/</code> 下。</p>
+<p><img src="https://imgkr.cn-bj.ufileos.com/00fd2718-bc65-4e99-84d2-32673adfe5ce.png" alt=""></p>
+<p>在 <code>vue-next-router</code> 中，同样做法会引发错误。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> router = createRouter(&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  history: routerHistory(),</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  routes: [&#123; <span class="attr">path</span>: <span class="string">'/'</span>, <span class="attr">name</span>: <span class="string">'foo'</span>, <span class="attr">component</span>: Foo &#125;]</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">&#125;)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">...</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; useRouter &#125; <span class="keyword">from</span> <span class="string">'vue-next-router'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">...</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> router = userRouter()</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">router.push(&#123;<span class="attr">name</span>: <span class="string">'baz'</span>&#125;)) <span class="comment">// 这段代码会报错</span></span></pre></td></tr></table></figure>
+
+<p><img src="https://imgkr.cn-bj.ufileos.com/e9b5295d-abbf-4a15-8e77-7bdb6e0512b9.png" alt=""></p>
+<h1 id="Active-RFCS"><a href="#Active-RFCS" class="headerlink" title="Active-RFCS"></a>Active-RFCS</h1><p>以下内容的改进来自 <code>active-rfcs</code>（<code>active</code> 就是已经讨论通过并且正在实施的特性）。</p>
+<ul>
+<li>0021-router-link-scoped-slot</li>
+<li>0022-router-merge-meta-routelocation</li>
+<li>0028-router-active-link</li>
+<li>0029-router-dynamic-routing </li>
+<li>0033-router-navigation-failures - 本文略</li>
+</ul>
+<h2 id="router-link-scoped-slot"><a href="#router-link-scoped-slot" class="headerlink" title="router-link-scoped-slot"></a>router-link-scoped-slot</h2><p>这个 <a href="https://github.com/vuejs/rfcs/blob/master/active-rfcs/0021-router-link-scoped-slot.md" target="_blank" rel="noopener">rfc</a> 主要提议及改进如下：</p>
+<ul>
+<li>删除 <code>tag</code> prop - 使用作用域插槽代替</li>
+<li>删除 <code>event</code> prop - 使用作用域插槽代替</li>
+<li>增加 <code>scoped-slot</code> API</li>
+<li>停止自动将 <code>click</code> 事件分配给内部锚点</li>
+<li>添加 <code>custom</code> prop 以完全支持自定义的 <code>router-link</code> 渲染</li>
+</ul>
+<p>在 vue2-router 中，想要将 <code>&lt;roter-link&gt;</code> 渲染成某种标签，例如 <code>&lt;button&gt;</code>，需要这么做：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">router-link</span> <span class="attr">to</span>=<span class="string">"/"</span> <span class="attr">tag</span>=<span class="string">"button"</span>&gt;</span>按钮<span class="tag">&lt;/<span class="name">router-link</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">!-- 渲染结果 --&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">button</span>&gt;</span>按钮<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></pre></td></tr></table></figure>
+
+<p>根据此次 <code>rfc</code>，以后可能需要这样做：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">router-link</span> <span class="attr">to</span>=<span class="string">"/"</span> <span class="attr">custom</span> <span class="attr">v-slot</span>=<span class="string">"&#123; navigate, isActive, isExactActive &#125;"</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="tag">&lt;<span class="name">button</span> <span class="attr">role</span>=<span class="string">"link"</span> @<span class="attr">click</span>=<span class="string">"navigate"</span> <span class="attr">:class</span>=<span class="string">"&#123; active: isActive, 'exact-active': isExactActive &#125;"</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    按钮</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  <span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">router-link</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">!-- 渲染结果 --&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">role</span>=<span class="string">"link"</span>&gt;</span>按钮<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></pre></td></tr></table></figure>
+
+<p>更多详细的介绍请看这个 <a href="https://github.com/vuejs/rfcs/blob/master/active-rfcs/0021-router-link-scoped-slot.md" target="_blank" rel="noopener">rfc</a> 。</p>
+<h2 id="router-active-link"><a href="#router-active-link" class="headerlink" title="router-active-link"></a>router-active-link</h2><p>这个 <a href="https://github.com/vuejs/rfcs/blob/master/active-rfcs/0028-router-active-link.md" target="_blank" rel="noopener">rfc</a> 改进的缘由是 <code>gayhub</code> 上名为 <a href="https://github.com/zamakkat" target="_blank" rel="noopener">zamakkat</a> 的大哥提出来的，他的 <a href="https://github.com/vuejs/vue-router/issues/2040" target="_blank" rel="noopener">issues</a> 主要内容是，有一个嵌套组件，像这样：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">Foo (links to /pages/foo)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">|-- Bar (links to /pages/foo/bar)</span></pre></td></tr></table></figure>
+
+<p><strong>需求：需要突出显示当前选中的页面（并且只能突出显示一项）。</strong></p>
+<ul>
+<li>如果用户打开 <code>/pages/foo</code>，则仅 <code>Foo</code> 高亮显示。</li>
+<li>如果用户打开 <code>/pages/foo/bar</code>，则仅 <code>Bar</code> 应高亮显示。</li>
+</ul>
+<p>但是，<code>Bar</code> 页面也有分页，选择第二页时，会导航到 <code>/pages/foo/bar?page=2</code>。<code>vue2-router</code> 默认情况下，路由匹配规则是「包含匹配」。也就是说，当前的路径是 <code>/pages</code> 开头的，那么 <code>&lt;router-link to=&quot;/pages/*&quot;&gt;</code> 都会被设置 <code>CSS</code> 类名。</p>
+<p>在这个示例中，如果使用「精确匹配模式」（<code>exact: true</code>），则精确匹配将匹配 <code>/pages/foo/bar</code>，不会匹配 <code>/pages/foo/bar?page=2</code> 因为它在比较中包括查询参数 <code>?page=2</code>，所以当选择第二页面时，<code>Bar</code> 就不高亮显示了。</p>
+<p>所以无论是「精确匹配」还是「包含匹配」都不能满足此需求。</p>
+<p>为了解决上述问题和其他边界情况，此次改进使得 <code>router-link-active</code> 应用方式更严谨，处理此问题的核心：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 确认路由 isActive 的行为</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">includesParams</span>(<span class="params"></span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="params">  outer: RouteLocation[<span class="string">'params'</span>],</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="params">  inner: RouteLocation[<span class="string">'params'</span>]</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="params"></span>): <span class="title">boolean</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> key <span class="keyword">in</span> inner) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">let</span> innerValue = inner[key]</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">let</span> outerValue = outer[key]</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">if</span> (<span class="keyword">typeof</span> innerValue === <span class="string">'string'</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">      <span class="keyword">if</span> (innerValue !== outerValue) <span class="keyword">return</span> <span class="literal">false</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">    &#125; <span class="keyword">else</span> &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">      <span class="keyword">if</span> (</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">        !<span class="built_in">Array</span>.isArray(outerValue) ||</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">        outerValue.length !== innerValue.length ||</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">        innerValue.some(<span class="function">(<span class="params">value, i</span>) =&gt;</span> value !== outerValue[i])</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">      )</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> <span class="literal">false</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">  &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">return</span> <span class="literal">true</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+<p>详情请参见这个 <a href="https://github.com/vuejs/rfcs/blob/master/active-rfcs/0028-router-active-link.md" target="_blank" rel="noopener">rfc</a>。</p>
+<h2 id="router-merge-meta-routelocation"><a href="#router-merge-meta-routelocation" class="headerlink" title="router-merge-meta-routelocation"></a>router-merge-meta-routelocation</h2><p>在 <code>vue2-router</code>中，<strong>在处理嵌套路由时，<code>meta</code> 仅包含匹配位置的 <code>route meta</code> 信息。</strong> 看个栗子：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  path: <span class="string">'/parent'</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  meta: &#123; <span class="attr">nested</span>: <span class="literal">true</span> &#125;,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  children: [</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    &#123; <span class="attr">path</span>: <span class="string">'foo'</span>, <span class="attr">meta</span>: &#123; <span class="attr">nested</span>: <span class="literal">true</span> &#125; &#125;,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    &#123; <span class="attr">path</span>: <span class="string">'bar'</span> &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">  ]</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<p>在导航到 <code>/parent/bar</code> 时，只会显示当前路由对应的 <code>meta</code> 信息为 <code>{}</code>，不会显示父级的 <code>meta</code> 信息。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">meta: &#123;&#125;</span></pre></td></tr></table></figure>
+
+<p>所以在这种情况下，需要通过 <code>to.matched.some()</code> 检查 <code>meta</code> 字段是否存在，而进行下一步逻辑。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">router.beforeEach(<span class="function">(<span class="params">to, <span class="keyword">from</span>, next</span>) =&gt;</span> &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">if</span> (to.matched.some(<span class="function"><span class="params">record</span> =&gt;</span> record.meta.nested))</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    next(<span class="string">'/login'</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">else</span> next()</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">&#125;)</span></pre></td></tr></table></figure>
+
+<p>因此为了避免使用额外的 <code>to.matched.some</code>， 这个 <code>rfc</code> 提议，将父子路由中的 <code>meta</code> 进行第一层合并（同 <code>Object.assing()</code>）。如果再遇到上述嵌套路由时，将可以直接通过 <code>to.meta</code> 获取信息。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">router.beforeEach(<span class="function">(<span class="params">to, <span class="keyword">from</span>, next</span>) =&gt;</span> &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">if</span> (to.meta.nested) next(<span class="string">'/login'</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">else</span> next()</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">&#125;)</span></pre></td></tr></table></figure>
+
+<p>更多详细介绍请看这个 <a href="https://github.com/vuejs/rfcs/blob/master/active-rfcs/0022-router-merge-meta-routelocation.md" target="_blank" rel="noopener">rfc</a>。</p>
+<p><strong>router-dynamic-routing</strong></p>
+<p>这个 <a href="https://github.com/vuejs/rfcs/blob/master/active-rfcs/0029-router-dynamic-routing.md" target="_blank" rel="noopener">rfc</a> 的主要内容是，允许给 Router 添加和删除（单个）路由规则。</p>
+<ul>
+<li><p><code>router.addRoute(route: RouteRecord)</code> - 添加路由规则</p>
+</li>
+<li><p><code>router.removeRoute(name: string | symbol)</code> - 删除路由规则</p>
+</li>
+<li><p><code>router.hasRoute(name: string | symbol): boolean</code> - 检查路由是否存在</p>
+</li>
+<li><p><code>router.getRoutes(): RouteRecord[]</code> - 获取当前路由规则的列表</p>
+</li>
+</ul>
+<p>相比 <code>vue2-router</code> 删除了动态添加多个路由规则的 <a href="https://router.vuejs.org/zh/api/#router-addroutes" target="_blank" rel="noopener">router.addRoutes</a> API。</p>
+<p>在 Vue 2.0 中，给路由动态添加多个路由规则时，需要这么做：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">router.addRoutes(  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"> [  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">   &#123; <span class="attr">path</span>: <span class="string">'/d'</span>, <span class="attr">component</span>: Home &#125;,  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">   &#123; <span class="attr">path</span>: <span class="string">'/b'</span>, <span class="attr">component</span>: Home &#125;  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"> ]  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">)</span></pre></td></tr></table></figure>
+
+<p>而在 Vue 3.0 中，需要使用 <code>router.addRoute()</code> 单个添加记录，并且还可以使用更丰富的 API：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">router.addRoute(&#123;  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"> path: <span class="string">'/new-route'</span>,  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"> name: <span class="string">'NewRoute'</span>,  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"> component: NewRoute  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">&#125;)  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">​  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 给现有路由添加子路由  </span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">router.addRoute(<span class="string">'ParentRoute'</span>, &#123;  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"> path: <span class="string">'new-route'</span>,  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line"> name: <span class="string">'NewRoute'</span>,  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line"> component: NewRoute  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">&#125;)  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 根据路由名称删除路由  </span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">router.removeRoute(<span class="string">'NewRoute'</span>)  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">​  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 获得路由的所有记录  </span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> routeRecords \= router.getRoutes()</span></pre></td></tr></table></figure>
+
+<p>关于 <code>RfCS</code> 上提出的改进，这里就介绍这么多，想了解更多的话，请移步到 <a href="https://github.com/vuejs/rfcs/tree/master/active-rfcs" target="_blank" rel="noopener">active-rfcs</a>。</p>
+<h1 id="走进源码"><a href="#走进源码" class="headerlink" title="走进源码"></a>走进源码</h1><p>相比 <code>vue2-router</code> 的 <code>ES6-class</code> 的写法 <code>vue-next-router</code> 的 <code>function-to-function</code> 的编写更易读也更容易维护。</p>
+<h2 id="Router-的-install"><a href="#Router-的-install" class="headerlink" title="Router 的 install"></a>Router 的 install</h2><p>暴露的 Vue 组件解析入口相对来说更清晰，开发插件时定义的 <code>install</code> 也简化了许多。</p>
+<p>我们现看下 <code>vue2-router</code> 源码中 <code>install</code> 方法的定义：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> View <span class="keyword">from</span> <span class="string">'./components/view'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> Link <span class="keyword">from</span> <span class="string">'./components/link'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">let</span> _Vue</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">install</span> (<span class="params">Vue</span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">  <span class="comment">// 当 install 方法被同一个插件多次调用，插件将只会被安装一次。</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">if</span> (install.installed &amp;&amp; _Vue === Vue) <span class="keyword">return</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">  install.installed = <span class="literal">true</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">  _Vue = Vue</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">const</span> isDef = <span class="function"><span class="params">v</span> =&gt;</span> v !== <span class="literal">undefined</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">const</span> registerInstance = <span class="function">(<span class="params">vm, callVal</span>) =&gt;</span> &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">let</span> i = vm.$options._parentVnode</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">if</span> (isDef(i) &amp;&amp; isDef(i = i.data) &amp;&amp; isDef(i = i.registerRouteInstance)) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">      i(vm, callVal)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">  &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">  <span class="comment">// 将 router 全局注册混入，影响注册之后所有创建的每个 Vue 实例</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">  Vue.mixin(&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">    beforeCreate () &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">      <span class="keyword">if</span> (isDef(<span class="keyword">this</span>.$options.router)) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">this</span>._routerRoot = <span class="keyword">this</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">this</span>._router = <span class="keyword">this</span>.$options.router</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">this</span>._router.init(<span class="keyword">this</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">        Vue.util.defineReactive(<span class="keyword">this</span>, <span class="string">'_route'</span>, <span class="keyword">this</span>._router.history.current)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">      &#125; <span class="keyword">else</span> &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">this</span>._routerRoot = (<span class="keyword">this</span>.$parent &amp;&amp; <span class="keyword">this</span>.$parent._routerRoot) || <span class="keyword">this</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line">      &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line">      <span class="comment">// 注册实例，将 this 传入</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">28</span></pre></td><td class="code"><pre><span class="line">      registerInstance(<span class="keyword">this</span>, <span class="keyword">this</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">29</span></pre></td><td class="code"><pre><span class="line">    &#125;,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">30</span></pre></td><td class="code"><pre><span class="line">    destroyed () &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">31</span></pre></td><td class="code"><pre><span class="line">      registerInstance(<span class="keyword">this</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">32</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">33</span></pre></td><td class="code"><pre><span class="line">  &#125;)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">34</span></pre></td><td class="code"><pre><span class="line">  <span class="comment">// 将 $router 绑定的 vue 原型对象上</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">35</span></pre></td><td class="code"><pre><span class="line">  <span class="built_in">Object</span>.defineProperty(Vue.prototype, <span class="string">'$router'</span>, &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">36</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">get</span> () &#123; <span class="keyword">return</span> <span class="keyword">this</span>._routerRoot._router &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">37</span></pre></td><td class="code"><pre><span class="line">  &#125;)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">38</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">39</span></pre></td><td class="code"><pre><span class="line">  <span class="comment">// 将 $route 手动绑定到 vue 原型对象上</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">40</span></pre></td><td class="code"><pre><span class="line">  <span class="built_in">Object</span>.defineProperty(Vue.prototype, <span class="string">'$route'</span>, &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">41</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">get</span> () &#123; <span class="keyword">return</span> <span class="keyword">this</span>._routerRoot._route &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">42</span></pre></td><td class="code"><pre><span class="line">  &#125;)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">43</span></pre></td><td class="code"><pre><span class="line">  <span class="comment">// 注册全局组件 RouterView、RouterLink</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">44</span></pre></td><td class="code"><pre><span class="line">  Vue.component(<span class="string">'RouterView'</span>, View)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">45</span></pre></td><td class="code"><pre><span class="line">  Vue.component(<span class="string">'RouterLink'</span>, Link)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">46</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">47</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">const</span> strats = Vue.config.optionMergeStrategies</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">48</span></pre></td><td class="code"><pre><span class="line">  <span class="comment">// use the same hook merging strategy for route hooks</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">49</span></pre></td><td class="code"><pre><span class="line">  strats.beforeRouteEnter = strats.beforeRouteLeave = strats.beforeRouteUpdate = strats.created</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">50</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<p>我们可以看到，在 <code>2.0</code> 中，<code>Router</code> 提供的 <code>install()</code> 方法中更触碰底层，需要用到选项的私有方法 <code>_parentVnode()</code>，还会用的 <code>Vue.mixin()</code> 进行全局混入，之后会手动将 <code>$router</code>、<code>$route</code> 绑定到 Vue 的原型对象上。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">VueRouter.install = install</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">VueRouter.version = <span class="string">'__VERSION__'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 以 src 方法导入</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (inBrowser &amp;&amp; <span class="built_in">window</span>.Vue) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">  <span class="built_in">window</span>.Vue.use(VueRouter)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<p>做了这么多事情之后，然后会在定义 VueRouter 类的文件中，将 <code>install()</code> 方法绑定到 VueRouter 的静态属性 <code>install</code> 上，以符合插件的标准。</p>
+<blockquote>
+<p>安装 Vue.js 插件。如果插件是一个对象，必须提供 install 方法。如果插件是一个函数，它会被作为 install 方法。install 方法调用时，会将 Vue 作为参数传入。</p>
+</blockquote>
+<p>我们可以看到，在 <code>2.0</code> 中开发一个插件需要做的事情很多，<code>install</code> 要处理很多事情，这对不了解 Vue 的童鞋，会变得很困难。</p>
+<p>说了这么多，那么 <code>vue-next-router</code> 中暴露的 <code>install</code> 是什么样的呢？ <code>applyRouterPlugin()</code> 方法就是处理 <code>install()</code> 全部逻辑的地方，请看源码：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; App, ComputedRef, reactive, computed &#125; <span class="keyword">from</span> <span class="string">'vue'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; Router &#125; <span class="keyword">from</span> <span class="string">'./router'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; RouterLink &#125; <span class="keyword">from</span> <span class="string">'./RouterLink'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; RouterView &#125; <span class="keyword">from</span> <span class="string">'./RouterView'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">applyRouterPlugin</span>(<span class="params">app: App, router: Router</span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">  <span class="comment">// 全局注册组件 RouterLink、RouterView</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">  app.component(<span class="string">'RouterLink'</span>, RouterLink)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">  app.component(<span class="string">'RouterView'</span>, RouterView)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">  <span class="comment">//省略部分代码</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">  <span class="comment">// 注入 Router 实例，源码其他地方会用到</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">  app.provide(routerKey, router)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">  app.provide(routeLocationKey, reactive(reactiveRoute))</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<p>基于 <code>3.0</code> 使用 <code>composition API</code> 时，没有 <code>this</code> 也没有混入，插件将充分利用 <code>provide</code> 和 <code>inject</code> 对外暴露一个组合函数即可，当然，没了 <code>this</code> 之后也有不好的地方，<a href="https://vue-composition-api-rfc.netlify.app/#plugin-development" target="_blank" rel="noopener">看这里</a>。</p>
+<blockquote>
+<p><code>provide</code> 和 <code>inject</code> 这对选项需要一起使用，以允许一个祖先组件向其所有子孙后代注入一个依赖，不论组件层次有多深，并在起上下游关系成立的时间里始终生效。</p>
+</blockquote>
+<p>再来看下 <code>vue-next-router</code> 中 <code>install()</code> 是什么样的：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">createRouter</span>(<span class="params">options: RouterOptions</span>): <span class="title">Router</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="comment">// 省略大部分代码</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">const</span> router: Router = &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    currentRoute,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    addRoute,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    removeRoute,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">    hasRoute,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">    history: routerHistory,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">    ...</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">// install</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">    install(app: App) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">      applyRouterPlugin(app, <span class="keyword">this</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">    &#125;,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">  &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">return</span> router</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<p>很简单，在 <code>vue-next-router</code> 提供的 <code>install()</code> 方法中调用 <code>applyRouterPlugin</code> 将 Vue 和 Router 作为参数传入。</p>
+<p>最后在应用程序中使用 Router 时，只需要导入 <code>createRouter</code> 然后显示调用 <code>use()</code> 方法，传入 Vue，就可以在程序中正常使用了。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; createRouter, createWebHistory &#125; <span class="keyword">from</span> <span class="string">'vue-next-router'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> router = createRouter(&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  history: createWebHistory(),</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  strict: <span class="literal">true</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">  routes: [</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    &#123; <span class="attr">path</span>: <span class="string">'/home'</span>, <span class="attr">redirect</span>: <span class="string">'/'</span> &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">&#125;)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> app = createApp(App)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">app.use(router)</span></pre></td></tr></table></figure>
+
+<h2 id="没有全局-router、-route"><a href="#没有全局-router、-route" class="headerlink" title="没有全局 $router、$route"></a>没有全局 <code>$router</code>、<code>$route</code></h2><p>我们知道在 vue2-router 中，通过在 Vue 根实例的 <code>router</code> 配置传入 <code>router</code> 实例，下面这些属性成员会被注入到每个子组件。</p>
+<ul>
+<li><p>this.$router - router 实例。</p>
+</li>
+<li><p>this.$route - 当前激活的路由信息对象。</p>
+</li>
+</ul>
+<p>但是 3.0 中，没有 <code>this</code>，也就不存在在 <code>this.$router | $route</code> 这样的属性，那么在 3.0 中应该如何使用这些属性呢？</p>
+<p>我们首先看下源码暴露的 <code>api</code> 的地方：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// useApi.ts</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; inject &#125; <span class="keyword">from</span> <span class="string">'vue'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; routerKey, routeLocationKey &#125; <span class="keyword">from</span> <span class="string">'./injectionSymbols'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; Router &#125; <span class="keyword">from</span> <span class="string">'./router'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; RouteLocationNormalizedLoaded &#125; <span class="keyword">from</span> <span class="string">'./types'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 导出 useRouter</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">useRouter</span>(<span class="params"></span>): <span class="title">Router</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">  <span class="comment">// 注入 router Router (key 与 上文的 provide 对应)</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">return</span> inject(routerKey)!</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 导入 useRoute</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">useRoute</span>(<span class="params"></span>): <span class="title">RouteLocationNormalizedLoaded</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">  <span class="comment">// 注入 路由对象信息 (key 与 上文的 provide 对应)</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">return</span> inject(routeLocationKey)!</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<p>源码中，<code>useRouter</code> 、 <code>useRoute</code> 通过 <code>inject</code> 注入对象实例，并以单个函数的方式暴露出去。</p>
+<p>在应用程序中只需要通过命名导入的方式导入即可使用。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; useRoute, useRouter &#125; <span class="keyword">from</span> <span class="string">'vue-next-router'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">...</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">setup() &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">const</span> route = useRoute()</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">const</span> router = useRouter()</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">  ...</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">  <span class="comment">// router -&gt; this.$router</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">  <span class="comment">// route &gt; this.$route</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">  router.push(<span class="string">'/foo'</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">  <span class="built_in">console</span>.log(route) <span class="comment">// 路由对象信息</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<p>除了可以命名导入 <code>useRouter</code> 、 <code>useRoute</code> 之外，还可暴露出很多函数，以更好的支持 <code>tree-shaking</code>（期待新版本的发布吧）。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">NavigationFailureType</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">RouterLink</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">RouterView</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">createMemoryHistory</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">createRouter</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">createWebHashHistory</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">createWebHistory</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">onBeforeRouteLeave</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">onBeforeRouteUpdate</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">parseQuery</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">stringifyQuery</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">useLink</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">useRoute</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">useRouter</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">...</span></pre></td></tr></table></figure>
+
+<h1 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h1><p>我想，就介绍这么多吧，上文介绍到的只是改进的一部分，感觉还有很多很多东西需要我们去了解和掌握，新版本给我们带来了更灵活的编程，让我们共同期待 vue 3.0 到到来吧。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div></div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechart.png" alt="破晓 L 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/%E6%A1%86%E6%9E%B6/" rel="tag"># 框架</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/04/10/tabs%20%E7%BB%84%E4%BB%B6%E8%AE%BE%E8%AE%A1/" rel="next" title="记一次 Vue 组件设计以及使用 computed 动态引入组件">
+                <i class="fa fa-chevron-left"></i> 记一次 Vue 组件设计以及使用 computed 动态引入组件
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpg"
+                alt="破晓 L" />
+            
+              <p class="site-author-name" itemprop="name">破晓 L</p>
+              <p class="site-description motion-element" itemprop="description">桃李不言 下自成蹊</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="http://your-feed-url" target="_blank" rel="alternate noopener">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/xingleizhao/Front-end-interview-API" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i></a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:zxljoly@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope-square"></i></a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#重大改进"><span class="nav-number">2.</span> <span class="nav-text">重大改进</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-构建选项-mode"><span class="nav-number">2.1.</span> <span class="nav-text">1. 构建选项 mode</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-构建选项-base"><span class="nav-number">2.2.</span> <span class="nav-text">2. 构建选项 base</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-捕获所有路由-时，现在必须使用带有自定义正则表达式的参数进行定义：-catchAll-。"><span class="nav-number">2.3.</span> <span class="nav-text">4. 捕获所有路由 ( /* ) 时，现在必须使用带有自定义正则表达式的参数进行定义：/:catchAll(.*)。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-router-match-与-router-resolve-合并在一起为-router-resolve，但签名略有不同。"><span class="nav-number">2.4.</span> <span class="nav-text">5. router.match 与 router.resolve 合并在一起为 router.resolve，但签名略有不同。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-删除-router-getMatchedComponents，可以从-router-currentRoute-value-matched-中获取。"><span class="nav-number">2.5.</span> <span class="nav-text">6. 删除 router.getMatchedComponents，可以从 router.currentRoute.value.matched 中获取。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-如果使用-lt-transition-gt-，则可能需要等待-router-准备就绪才能挂载应用程序。"><span class="nav-number">2.6.</span> <span class="nav-text">7. 如果使用 &lt;transition&gt;，则可能需要等待 router 准备就绪才能挂载应用程序。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-在服务端渲染-（SSR）-中，需要使用一个三目运算符手动传递合适的-mode。"><span class="nav-number">2.7.</span> <span class="nav-text">8. 在服务端渲染 （SSR） 中，需要使用一个三目运算符手动传递合适的 mode。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-push-或者-resolve-一个不存在的命名路由时，将会引发错误，而不是导航到根路由-quot-quot-并且不显示任何内容。"><span class="nav-number">2.8.</span> <span class="nav-text">9. push 或者 resolve 一个不存在的命名路由时，将会引发错误，而不是导航到根路由 &quot;/&quot; 并且不显示任何内容。</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Active-RFCS"><span class="nav-number">3.</span> <span class="nav-text">Active-RFCS</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#router-link-scoped-slot"><span class="nav-number">3.1.</span> <span class="nav-text">router-link-scoped-slot</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#router-active-link"><span class="nav-number">3.2.</span> <span class="nav-text">router-active-link</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#router-merge-meta-routelocation"><span class="nav-number">3.3.</span> <span class="nav-text">router-merge-meta-routelocation</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#走进源码"><span class="nav-number">4.</span> <span class="nav-text">走进源码</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Router-的-install"><span class="nav-number">4.1.</span> <span class="nav-text">Router 的 install</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#没有全局-router、-route"><span class="nav-number">4.2.</span> <span class="nav-text">没有全局 $router、$route</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#最后"><span class="nav-number">5.</span> <span class="nav-text">最后</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">破晓 L</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
